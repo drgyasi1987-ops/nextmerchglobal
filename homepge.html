@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextMerch Global — Branded merch, delivered anywhere on Earth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#6A2B8D; --purple-light:#9451BE; --purple-dark:#3D1653; --plum:#2B1136;
+    --gold:#C9963E; --gold-light:#E4C177;
+    --teal:#1F9C82; --coral:#E2703F;
+    --paper:#FFFFFF; --paper-2:#F6F5F8;
+    --ink:#1D1526; --ink-soft:#655A72; --line:rgba(29,21,38,0.10);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ font-family:'Inter', sans-serif; background:var(--paper); color:var(--ink); line-height:1.55; overflow-x:hidden; }
+  h1,h2,h3,.display{ font-family:'Sora', sans-serif; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ list-style:none; }
+  .wrap{ max-width:1220px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- HEADER (glossy shimmer) ---------- */
+  header{
+    position:relative; z-index:200;
+    background:
+      radial-gradient(120% 220% at 15% -60%, rgba(255,255,255,0.35), transparent 60%),
+      linear-gradient(180deg, #9B57C4 0%, var(--purple) 45%, var(--purple-dark) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.45),
+      inset 0 -22px 40px rgba(20,4,30,0.30),
+      0 6px 24px rgba(30,8,45,0.35);
+    overflow:hidden;
+  }
+  header::before{
+    content:''; position:absolute; top:0; left:-160%; width:55%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.30), transparent);
+    animation:shimmer 7s ease-in-out infinite; pointer-events:none;
+  }
+  @keyframes shimmer{ 0%{left:-160%;} 45%{left:160%;} 100%{left:160%;} }
+  .header-inner{ position:relative; display:flex; align-items:center; justify-content:space-between; padding:16px 32px; max-width:1220px; margin:0 auto; }
+  .logo{ display:flex; align-items:center; gap:10px; filter:drop-shadow(0 1px 1px rgba(0,0,0,0.25)); }
+  .logo-mark{ width:34px; height:34px; flex-shrink:0; }
+  .logo-text{ display:flex; flex-direction:column; line-height:1; }
+  .logo-text .name{ font-family:'Sora', sans-serif; font-weight:700; font-size:19px; color:#fff; letter-spacing:-0.01em; }
+  .logo-text .tag{ font-family:'JetBrains Mono', monospace; font-weight:500; font-size:9.5px; color:var(--gold-light); letter-spacing:0.24em; margin-top:2px; }
+
+  .auth-widget{ position:relative; }
+  .auth-toggle{ display:flex; align-items:center; background:rgba(0,0,0,0.20); border:1px solid rgba(255,255,255,0.28); border-radius:999px; padding:3px; position:relative; cursor:pointer; box-shadow:inset 0 1px 2px rgba(0,0,0,0.25); }
+  .auth-toggle .slider{ position:absolute; top:3px; left:3px; height:calc(100% - 6px); width:calc(50% - 3px); border-radius:999px; background:linear-gradient(180deg, var(--gold-light), var(--gold)); box-shadow:0 2px 6px rgba(0,0,0,0.3); transition:transform 0.28s cubic-bezier(.65,0,.35,1); z-index:0; }
+  .auth-toggle.mode-signup .slider{ transform:translateX(100%); }
+  .auth-toggle button{ position:relative; z-index:1; border:none; background:transparent; padding:8px 18px; font-family:'Inter',sans-serif; font-weight:600; font-size:13.5px; color:rgba(255,255,255,0.85); cursor:pointer; border-radius:999px; transition:color 0.25s ease; white-space:nowrap; }
+  .auth-toggle.mode-signin button.btn-signin, .auth-toggle.mode-signup button.btn-signup{ color:var(--purple-dark); }
+  .auth-panel{ position:absolute; top:calc(100% + 14px); right:0; width:300px; background:#fff; border-radius:14px; box-shadow:0 20px 45px rgba(30,8,45,0.28), 0 2px 8px rgba(30,8,45,0.12); padding:22px 22px 20px; opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.22s ease; z-index:250; }
+  .auth-panel.open{ opacity:1; visibility:visible; transform:translateY(0); }
+  .auth-panel h3{ font-size:16px; margin-bottom:3px; color:var(--ink); }
+  .auth-panel p.sub{ font-size:12.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .auth-panel label{ display:block; font-size:11.5px; font-weight:600; color:var(--ink-soft); margin-bottom:5px; }
+  .auth-panel input{ width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-size:13.5px; margin-bottom:12px; background:var(--paper-2); }
+  .field-name{ display:none; } .auth-panel.signup-mode .field-name{ display:block; }
+  .auth-submit{ width:100%; padding:10px; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(180deg, var(--purple-light), var(--purple)); color:#fff; font-weight:600; font-size:13.5px; box-shadow:0 4px 12px rgba(106,43,141,0.35); }
+  .auth-switch-line{ text-align:center; font-size:12px; color:var(--ink-soft); margin-top:12px; }
+  .auth-switch-line span{ color:var(--purple); font-weight:600; cursor:pointer; }
+
+  /* ---------- SUBNAV / MEGA MENU ---------- */
+  .subnav{ position:sticky; top:0; z-index:150; background:rgba(255,255,255,0.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); box-shadow:0 2px 14px rgba(29,21,38,0.06); }
+  .subnav-inner{ display:flex; align-items:center; gap:4px; max-width:1220px; margin:0 auto; padding:0 32px; }
+  .nav-item{ position:relative; }
+  .nav-item > a{ display:inline-flex; align-items:center; gap:6px; padding:16px 20px; font-size:14.5px; font-weight:600; color:var(--ink-soft); border-bottom:2.5px solid transparent; margin-bottom:-1px; cursor:pointer; }
+  .nav-item > a:hover, .nav-item.open > a{ color:var(--purple); border-color:var(--gold); }
+  .caret{ font-size:10px; transition:transform 0.2s ease; }
+  .nav-item.open .caret{ transform:rotate(180deg); }
+  .mega{ position:absolute; top:calc(100% + 0px); left:0; min-width:260px; background:#fff; border-radius:0 0 14px 14px; box-shadow:0 24px 50px rgba(29,21,38,0.16); padding:10px; opacity:0; visibility:hidden; transform:translateY(-6px); transition:all 0.2s ease; }
+  .nav-item.open .mega{ opacity:1; visibility:visible; transform:translateY(0); }
+  .mega a{ display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:9px; font-size:13.8px; font-weight:500; color:var(--ink); }
+  .mega a:hover{ background:var(--paper-2); color:var(--purple); }
+  .mega a .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+  .btn{ padding:14px 26px; border-radius:10px; font-weight:600; font-size:14.5px; cursor:pointer; border:none; display:inline-flex; align-items:center; gap:8px; }
+  .btn-primary{ background:linear-gradient(180deg, var(--gold-light), var(--gold)); color:var(--plum); box-shadow:0 8px 20px rgba(201,150,62,0.35); }
+  .btn-secondary{ background:transparent; color:var(--purple); border:1.5px solid rgba(106,43,141,0.3); }
+  .btn-small{ padding:9px 16px; font-size:12.5px; border-radius:8px; }
+
+  /* ---------- HERO ---------- */
+  .hero{ padding:76px 0 60px; position:relative; overflow:hidden; }
+  .hero::before{ content:''; position:absolute; top:-180px; right:-160px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(106,43,141,0.10), transparent 70%); }
+  .hero::after{ content:''; position:absolute; bottom:-160px; left:-140px; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(201,150,62,0.12), transparent 70%); }
+  .hero-grid{ display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; position:relative; z-index:1; }
+  .eyebrow{ display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.14em; color:var(--purple); background:rgba(106,43,141,0.08); border:1px solid rgba(106,43,141,0.18); padding:6px 14px; border-radius:999px; margin-bottom:24px; text-transform:uppercase; }
+  .eyebrow::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); }
+  .hero h1{ font-size:54px; font-weight:700; line-height:1.05; letter-spacing:-0.02em; color:var(--ink); margin-bottom:22px; }
+  .hero h1 em{ font-style:normal; color:var(--purple); }
+  .hero p.lead{ font-size:17px; color:var(--ink-soft); max-width:480px; margin-bottom:32px; }
+  .hero-ctas{ display:flex; gap:14px; margin-bottom:40px; flex-wrap:wrap; }
+  .hero-stats{ display:flex; gap:36px; padding-top:24px; border-top:1px solid var(--line); }
+  .hero-stats .stat .num{ font-family:'JetBrains Mono', monospace; font-size:22px; font-weight:500; color:var(--purple-dark); }
+  .hero-stats .stat .label{ font-size:12px; color:var(--ink-soft); margin-top:3px; }
+
+  .hero-visual{ position:relative; }
+  .hero-collage{ display:grid; grid-template-columns:1.2fr 1fr; grid-template-rows:1fr 1fr; gap:14px; height:460px; }
+  .collage-card{ border-radius:18px; position:relative; overflow:hidden; display:flex; align-items:flex-end; padding:16px; box-shadow:0 20px 40px rgba(29,21,38,0.18); }
+  .collage-card .tag{ position:relative; z-index:1; background:rgba(255,255,255,0.92); color:var(--purple-dark); font-family:'JetBrains Mono', monospace; font-size:10.5px; font-weight:500; padding:6px 12px; border-radius:999px; }
+  .cc1{ grid-row:1/3; background:linear-gradient(160deg,#9B57C4,#3D1653); }
+  .cc2{ background:linear-gradient(160deg,#E4C177,#C9963E); }
+  .cc3{ background:linear-gradient(160deg,#1F9C82,#0F6E56); }
+  .collage-card svg{ position:absolute; opacity:0.9; }
+
+  /* ---------- MARQUEE CAROUSEL ---------- */
+  .marquee-section{ padding:64px 0 72px; background:var(--paper-2); }
+  .marquee-head{ display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:32px; }
+  .marquee-head h2{ font-size:28px; color:var(--ink); letter-spacing:-0.01em; }
+  .marquee-head p{ color:var(--ink-soft); font-size:14px; margin-top:6px; }
+  .marquee-viewport{ width:100%; max-width:750px; margin:0 auto; overflow:hidden; position:relative; border-radius:16px; }
+  .marquee-viewport::before, .marquee-viewport::after{ content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none; }
+  .marquee-viewport::before{ left:0; background:linear-gradient(90deg, var(--paper-2), transparent); }
+  .marquee-viewport::after{ right:0; background:linear-gradient(270deg, var(--paper-2), transparent); }
+  .marquee-track{ display:flex; gap:16px; width:max-content; animation:scrollLeft 26s linear infinite; }
+  .marquee-track:hover{ animation-play-state:paused; }
+  @keyframes scrollLeft{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  .m-card{ width:170px; height:220px; background:#fff; border-radius:14px; border:1px solid var(--line); padding:14px; flex-shrink:0; display:flex; flex-direction:column; box-shadow:0 8px 20px rgba(29,21,38,0.06); }
+  .m-card .icon-box{ flex:1; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; }
+  .m-card .icon-box svg{ width:52px; height:52px; }
+  .m-card .p-name{ font-size:13px; font-weight:600; color:var(--ink); }
+  .m-card .p-price{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--purple); margin-top:2px; }
+
+  /* ---------- ABOUT (tabbed) ---------- */
+  .about-section{ padding:96px 0; }
+  .section-head{ max-width:600px; margin:0 auto 48px; text-align:center; }
+  .section-head h2{ font-size:34px; color:var(--ink); margin-bottom:14px; letter-spacing:-0.01em; }
+  .section-head p{ color:var(--ink-soft); font-size:15.5px; }
+  .about-layout{ display:grid; grid-template-columns:260px 1fr; gap:40px; }
+  .about-tabs{ display:flex; flex-direction:column; gap:6px; }
+  .about-tabs button{ text-align:left; padding:14px 18px; border-radius:12px; border:none; background:transparent; cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; color:var(--ink-soft); }
+  .about-tabs button.active{ background:linear-gradient(135deg, var(--purple), var(--purple-dark)); color:#fff; box-shadow:0 10px 22px rgba(106,43,141,0.25); }
+  .about-panel{ background:var(--paper-2); border-radius:20px; padding:44px; min-height:280px; }
+  .about-panel h3{ font-size:24px; margin-bottom:16px; color:var(--ink); }
+  .about-panel p{ color:var(--ink-soft); font-size:15px; max-width:640px; margin-bottom:14px; }
+  .about-panel ul{ margin-top:12px; }
+  .about-panel li{ padding:8px 0 8px 22px; position:relative; color:var(--ink-soft); font-size:14.5px; }
+  .about-panel li::before{ content:''; position:absolute; left:0; top:16px; width:7px; height:7px; border-radius:50%; background:var(--gold); }
+
+  /* ---------- MERCHANDISE CATEGORIES ---------- */
+  .categories{ background:var(--paper-2); padding:96px 0; }
+  .cat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .cat-card{ background:#fff; border-radius:18px; overflow:hidden; border:1px solid var(--line); transition:transform 0.2s ease, box-shadow 0.2s ease; }
+  .cat-card:hover{ transform:translateY(-4px); box-shadow:0 20px 40px rgba(29,21,38,0.12); }
+  .cat-visual{ height:150px; display:flex; align-items:center; justify-content:center; }
+  .cat-visual svg{ width:64px; height:64px; }
+  .cat-body{ padding:22px 24px 26px; }
+  .cat-card h3{ font-size:16.5px; margin-bottom:8px; color:var(--ink); }
+  .cat-card p{ font-size:13.5px; color:var(--ink-soft); }
+
+  /* ---------- WHOLESALE / ECOMMERCE ---------- */
+  .wholesale-section{ padding:96px 0; }
+  .shop-toolbar{ display:flex; gap:14px; align-items:center; margin-bottom:32px; background:var(--paper-2); border-radius:14px; padding:10px 14px; }
+  .shop-toolbar input{ flex:1; border:none; background:transparent; font-size:14.5px; padding:10px 6px; }
+  .shop-toolbar input:focus{ outline:none; }
+  .shop-layout{ display:grid; grid-template-columns:220px 1fr; gap:32px; }
+  .shop-sidebar h4{ font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:var(--ink-soft); margin-bottom:14px; }
+  .shop-sidebar a{ display:block; padding:9px 0; font-size:14px; color:var(--ink-soft); border-bottom:1px solid var(--line); }
+  .shop-sidebar a:hover{ color:var(--purple); }
+  .shop-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .shop-card{ background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:box-shadow 0.2s ease, transform 0.2s ease; }
+  .shop-card:hover{ box-shadow:0 16px 32px rgba(29,21,38,0.12); transform:translateY(-3px); }
+  .shop-thumb{ height:130px; display:flex; align-items:center; justify-content:center; }
+  .shop-thumb svg{ width:50px; height:50px; }
+  .shop-info{ padding:14px 16px 16px; }
+  .shop-info .s-name{ font-size:13.5px; font-weight:600; color:var(--ink); margin-bottom:6px; line-height:1.3; }
+  .shop-info .s-price{ font-family:'JetBrains Mono', monospace; color:var(--purple); font-weight:500; font-size:14px; }
+  .shop-info .s-moq{ font-size:11.5px; color:var(--ink-soft); margin:4px 0 10px; }
+  .badge-supplier{ display:inline-flex; align-items:center; gap:5px; background:rgba(31,156,130,0.10); color:var(--teal); font-size:10.5px; font-weight:600; padding:3px 9px; border-radius:999px; margin-bottom:8px; }
+
+  /* ---------- DEPARTURE BOARD ---------- */
+  .board-section{ background:var(--plum); padding:80px 0; color:#fff; }
+  .board-head{ max-width:560px; margin-bottom:44px; }
+  .board-head .eyebrow{ background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); color:var(--gold-light); }
+  .board-head h2{ font-size:32px; color:#fff; margin-bottom:12px; letter-spacing:-0.01em; }
+  .board-head p{ color:rgba(255,255,255,0.6); font-size:15px; }
+  .board{ background:#1a0a22; border-radius:14px; border:1px solid rgba(255,255,255,0.08); overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.35); }
+  .board-row{ display:grid; grid-template-columns:1.1fr 1.6fr 1fr 1.4fr 1fr; padding:16px 26px; align-items:center; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .board-row.head{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.12em; color:rgba(255,255,255,0.4); text-transform:uppercase; padding:14px 26px; }
+  .board-row:not(.head){ font-family:'JetBrains Mono', monospace; font-size:13.5px; }
+  .board-row .hub{ color:var(--gold-light); font-weight:500; }
+  .board-row .dest{ color:#fff; }
+  .board-row .status{ display:flex; align-items:center; gap:7px; }
+  .board-row .status .dot{ width:7px; height:7px; border-radius:50%; }
+  .status.departed{ color:#8FD19E; } .status.departed .dot{ background:#8FD19E; }
+  .status.customs{ color:var(--gold-light); } .status.customs .dot{ background:var(--gold-light); }
+  .status.packing{ color:#7F9FDD; } .status.packing .dot{ background:#7F9FDD; }
+  .flip{ animation:flipIn 0.5s ease; }
+  @keyframes flipIn{ from{ opacity:0; transform:translateY(-6px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ---------- PROCESS ---------- */
+  .process{ padding:96px 0; }
+  .process-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; }
+  .process-grid::before{ content:''; position:absolute; top:26px; left:12.5%; right:12.5%; height:1px; background:repeating-linear-gradient(90deg, var(--line) 0 8px, transparent 8px 16px); }
+  .step{ padding:0 20px; position:relative; }
+  .step .num{ width:52px; height:52px; border-radius:50%; background:#fff; border:1.5px solid var(--purple); color:var(--purple); font-family:'JetBrains Mono', monospace; font-weight:500; font-size:15px; display:flex; align-items:center; justify-content:center; margin-bottom:20px; position:relative; z-index:1; }
+  .step h3{ font-size:17px; margin-bottom:8px; color:var(--ink); }
+  .step p{ font-size:13.5px; color:var(--ink-soft); }
+
+  /* ---------- TRUSTED ---------- */
+  .trusted{ padding:60px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  .trusted p.label{ text-align:center; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.14em; color:var(--ink-soft); text-transform:uppercase; margin-bottom:32px; }
+  .logo-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px; }
+  .logo-row span{ font-family:'Sora', sans-serif; font-weight:700; font-size:17px; color:var(--ink-soft); opacity:0.55; letter-spacing:-0.01em; }
+
+  /* ---------- CTA ---------- */
+  .cta-band{ margin:96px auto; max-width:1220px; padding:0 32px; }
+  .cta-inner{ background:linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%); border-radius:22px; padding:64px 56px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 30px 60px rgba(43,17,54,0.28); position:relative; overflow:hidden; gap:40px; flex-wrap:wrap; }
+  .cta-inner::before{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 90% 10%, rgba(255,255,255,0.15), transparent 50%); }
+  .cta-inner h2{ font-size:30px; color:#fff; max-width:440px; position:relative; z-index:1; letter-spacing:-0.01em; }
+  .cta-inner .btn-primary{ position:relative; z-index:1; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--plum); color:rgba(255,255,255,0.7); padding:64px 0 32px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:48px; }
+  .footer-brand p{ font-size:13.5px; margin-top:16px; max-width:260px; color:rgba(255,255,255,0.5); }
+  .footer-col-group{ display:flex; flex-direction:column; gap:32px; }
+  .footer-col h4{ font-size:12.5px; color:rgba(255,255,255,0.85); margin-bottom:16px; letter-spacing:0.03em; }
+  .footer-col a{ display:block; font-size:13.5px; color:rgba(255,255,255,0.55); margin-bottom:11px; }
+  .footer-col a:hover{ color:#fff; }
+  .footer-bottom{ border-top:1px solid rgba(255,255,255,0.1); padding-top:24px; display:flex; justify-content:space-between; font-size:12.5px; color:rgba(255,255,255,0.4); flex-wrap:wrap; gap:12px; }
+
+  @media (max-width:920px){
+    .subnav-inner{ overflow-x:auto; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero h1{ font-size:38px; }
+    .hero-collage{ height:340px; }
+    .about-layout{ grid-template-columns:1fr; }
+    .process-grid{ grid-template-columns:1fr 1fr; row-gap:36px; }
+    .process-grid::before{ display:none; }
+    .cat-grid{ grid-template-columns:1fr 1fr; }
+    .shop-layout{ grid-template-columns:1fr; }
+    .shop-grid{ grid-template-columns:1fr 1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+    .board-row{ grid-template-columns:1fr 1.4fr 1fr; }
+    .board-row span:nth-child(4), .board-row span:nth-child(5){ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="#E4C177" stroke-width="2"/>
+        <ellipse cx="20" cy="20" rx="18" ry="7" stroke="#ffffff" stroke-width="1.4" opacity="0.85"/>
+        <ellipse cx="20" cy="20" rx="7" ry="18" stroke="#ffffff" stroke-width="1.4" opacity="0.85"/>
+        <circle cx="20" cy="20" r="3.4" fill="#E4C177"/>
+      </svg>
+      <div class="logo-text">
+        <span class="name">NextMerch</span>
+        <span class="tag">GLOBAL</span>
+      </div>
+    </div>
+    <div class="auth-widget">
+      <div class="auth-toggle mode-signin" id="authToggle">
+        <div class="slider"></div>
+        <button class="btn-signin" onclick="setAuthMode('signin')">Sign in</button>
+        <button class="btn-signup" onclick="setAuthMode('signup')">Sign up</button>
+      </div>
+      <div class="auth-panel" id="authPanel">
+        <h3 id="panelTitle">Welcome back</h3>
+        <p class="sub" id="panelSub">Sign in to manage your merch programs.</p>
+        <div class="field-name"><label>Full name</label><input type="text" placeholder="Jordan Ellis"></div>
+        <label>Work email</label><input type="email" placeholder="name@company.com">
+        <label>Password</label><input type="password" placeholder="••••••••">
+        <button class="auth-submit" id="submitBtn">Sign in</button>
+        <p class="auth-switch-line" id="switchLine">New here? <span onclick="setAuthMode('signup')">Create an account</span></p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <div class="nav-item"><a href="#home">Home</a></div>
+    <div class="nav-item" id="aboutNav">
+      <a onclick="toggleMenu('aboutNav')">About Us <span class="caret">▾</span></a>
+      <div class="mega">
+        <a onclick="goAbout('story')"><span class="dot"></span>Our Story</a>
+        <a onclick="goAbout('philosophy')"><span class="dot"></span>Our Philosophy</a>
+        <a onclick="goAbout('mission')"><span class="dot"></span>Mission Statement</a>
+        <a onclick="goAbout('vision')"><span class="dot"></span>Vision Statement</a>
+        <a onclick="goAbout('values')"><span class="dot"></span>Core Values</a>
+        <a onclick="goAbout('way')"><span class="dot"></span>The NextMerch Way</a>
+      </div>
+    </div>
+    <div class="nav-item" id="bizNav">
+      <a onclick="toggleMenu('bizNav')">Business Activities <span class="caret">▾</span></a>
+      <div class="mega">
+        <a href="#wholesale"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
+        <a href="#merchandise"><span class="dot"></span>Merchandise</a>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#contact">Contact Us</a></div>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">40+ country fulfillment network</div>
+      <h1>Merch that ships<br>like it <em>means it.</em></h1>
+      <p class="lead">Design once. We source, brand, warehouse, and deliver corporate merch worldwide — so your ops team never touches a box, and your new hire's welcome kit shows up on day one, not week six.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary">Start a merch program</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('wholesale').scrollIntoView({behavior:'smooth'})">Browse wholesale</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">40+</div><div class="label">countries served</div></div>
+        <div class="stat"><div class="num">6</div><div class="label">regional hubs</div></div>
+        <div class="stat"><div class="num">5 days</div><div class="label">avg. sample turnaround</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-collage">
+        <div class="collage-card cc1">
+          <svg viewBox="0 0 100 100" width="150" height="150" style="top:20px; left:20px;"><rect x="20" y="30" width="60" height="55" rx="6" fill="#fff" opacity="0.15"/><path d="M35 30 V22 a15 15 0 0 1 30 0 V30" stroke="#fff" stroke-width="4" fill="none" opacity="0.6"/></svg>
+          <span class="tag">Custom apparel &amp; bags</span>
+        </div>
+        <div class="collage-card cc2">
+          <svg viewBox="0 0 100 100" width="90" height="90" style="top:14px; right:10px;"><path d="M25 35 h40 l-4 45 a6 6 0 0 1 -6 5 H35 a6 6 0 0 1 -6 -5 Z" fill="#fff" opacity="0.35"/><rect x="30" y="20" width="30" height="15" rx="4" fill="#fff" opacity="0.5"/></svg>
+          <span class="tag">Drinkware</span>
+        </div>
+        <div class="collage-card cc3">
+          <svg viewBox="0 0 100 100" width="90" height="90" style="bottom:10px; right:14px;"><circle cx="50" cy="50" r="30" fill="none" stroke="#fff" stroke-width="4" opacity="0.4"/><rect x="20" y="42" width="14" height="20" rx="6" fill="#fff" opacity="0.55"/><rect x="66" y="42" width="14" height="20" rx="6" fill="#fff" opacity="0.55"/></svg>
+          <span class="tag">Tech accessories</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="marquee-section">
+  <div class="wrap">
+    <div class="marquee-head">
+      <div>
+        <h2>General merchandise, always moving</h2>
+        <p>A live look at what's rolling through the catalog this week.</p>
+      </div>
+    </div>
+  </div>
+  <div class="marquee-viewport">
+    <div class="marquee-track" id="marqueeTrack"></div>
+  </div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="margin-left:auto;margin-right:auto;">About us</div>
+      <h2>The company behind the shipment</h2>
+      <p>Six ways to understand who we are — pick a thread and follow it.</p>
+    </div>
+    <div class="about-layout">
+      <div class="about-tabs" id="aboutTabs">
+        <button class="active" data-tab="story" onclick="setAboutTab('story')">Our Story</button>
+        <button data-tab="philosophy" onclick="setAboutTab('philosophy')">Our Philosophy</button>
+        <button data-tab="mission" onclick="setAboutTab('mission')">Mission Statement</button>
+        <button data-tab="vision" onclick="setAboutTab('vision')">Vision Statement</button>
+        <button data-tab="values" onclick="setAboutTab('values')">Core Values</button>
+        <button data-tab="way" onclick="setAboutTab('way')">The NextMerch Way</button>
+      </div>
+      <div class="about-panel" id="aboutPanel">
+        <h3 id="aboutPanelTitle">Our Story</h3>
+        <div id="aboutPanelBody"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories" id="merchandise">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="margin-left:auto;margin-right:auto;">Merchandise</div>
+      <h2>What we source and brand</h2>
+      <p>Six categories, each stocked across every regional hub.</p>
+    </div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#9B57C4,#6A2B8D);"><svg viewBox="0 0 100 100"><path d="M25 35 h50 l-5 45 H30 Z" fill="none" stroke="#fff" stroke-width="4"/><path d="M38 35 V25 a12 12 0 0 1 24 0 v10" fill="none" stroke="#fff" stroke-width="4"/></svg></div><div class="cat-body"><h3>Apparel &amp; outerwear</h3><p>Tees, fleece, and rain shells in sizes and fabrics that fit real teams.</p></div></div>
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#E4C177,#C9963E);"><svg viewBox="0 0 100 100"><path d="M28 35 h34 l-3 40 a5 5 0 0 1 -5 4 H36 a5 5 0 0 1 -5 -4 Z" fill="none" stroke="#3D1653" stroke-width="4"/><path d="M33 22 h24 v13 h-24 Z" fill="none" stroke="#3D1653" stroke-width="4"/></svg></div><div class="cat-body"><h3>Drinkware &amp; tabletop</h3><p>Insulated bottles, mugs, and tumblers with laser-etched branding.</p></div></div>
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#4a4553,#221530);"><svg viewBox="0 0 100 100"><circle cx="50" cy="45" r="22" fill="none" stroke="#fff" stroke-width="4"/><rect x="22" y="40" width="12" height="18" rx="5" fill="#fff"/><rect x="66" y="40" width="12" height="18" rx="5" fill="#fff"/></svg></div><div class="cat-body"><h3>Tech &amp; travel</h3><p>Chargers, cable kits, and packing cubes people actually keep in their bag.</p></div></div>
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#efeae2,#c9c2b4);"><svg viewBox="0 0 100 100"><rect x="28" y="22" width="44" height="56" rx="4" fill="none" stroke="#3D1653" stroke-width="4"/><line x1="36" y1="34" x2="64" y2="34" stroke="#3D1653" stroke-width="3"/><line x1="36" y1="44" x2="64" y2="44" stroke="#3D1653" stroke-width="3"/><line x1="36" y1="54" x2="54" y2="54" stroke="#3D1653" stroke-width="3"/></svg></div><div class="cat-body"><h3>Office &amp; desk</h3><p>Notebooks, pens, and desk accessories for onboarding and client gifting.</p></div></div>
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#3D1653,#2B1136);"><svg viewBox="0 0 100 100"><rect x="24" y="30" width="52" height="42" rx="6" fill="none" stroke="#fff" stroke-width="4"/><path d="M24 42 h52" stroke="#fff" stroke-width="4"/><rect x="42" y="20" width="16" height="16" rx="3" fill="#fff"/></svg></div><div class="cat-body"><h3>Event &amp; onboarding kits</h3><p>Pre-assembled and drop-shipped straight to a home address or venue.</p></div></div>
+      <div class="cat-card"><div class="cat-visual" style="background:linear-gradient(160deg,#E4C177,#9B57C4);"><svg viewBox="0 0 100 100"><path d="M50 20 C30 30 25 55 50 80 C75 55 70 30 50 20 Z" fill="none" stroke="#2B1136" stroke-width="4"/></svg></div><div class="cat-body"><h3>Sustainable &amp; eco</h3><p>Recycled materials and low-impact decoration, verified at the factory.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wholesale-section" id="wholesale">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="margin-left:auto;margin-right:auto;">Wholesale &amp; retail trade</div>
+      <h2>Source in bulk, direct from verified suppliers</h2>
+      <p>Browse by category, compare MOQs, and message a supplier directly — built the way global B2B sourcing should work.</p>
+    </div>
+    <div class="shop-toolbar">
+      <input type="text" placeholder="Search products, suppliers, or categories">
+      <button class="btn btn-primary btn-small">Search</button>
+    </div>
+    <div class="shop-layout">
+      <div class="shop-sidebar">
+        <h4>Categories</h4>
+        <a href="#">Apparel &amp; textiles</a>
+        <a href="#">Drinkware &amp; tabletop</a>
+        <a href="#">Electronics &amp; gadgets</a>
+        <a href="#">Bags &amp; travel</a>
+        <a href="#">Office supplies</a>
+        <a href="#">Eco &amp; sustainable</a>
+        <a href="#">Packaging &amp; kitting</a>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="board-section" id="board">
+  <div class="wrap">
+    <div class="board-head">
+      <div class="eyebrow">Live network status</div>
+      <h2>Departing the warehouse floor</h2>
+      <p>A snapshot of merch orders leaving our regional hubs right now.</p>
+    </div>
+    <div class="board">
+      <div class="board-row head"><span>Hub</span><span>Destination</span><span>Order</span><span>Items</span><span>Status</span></div>
+      <div id="boardBody"></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head"><h2>How a shipment happens</h2><p>Four handoffs, one continuous chain, from factory floor to someone's desk.</p></div>
+    <div class="process-grid">
+      <div class="step"><div class="num">01</div><h3>Source</h3><p>Vetted factories and ethical audits, with samples back in five days.</p></div>
+      <div class="step"><div class="num">02</div><h3>Brand</h3><p>Embroidery, screen print, laser engrave, or foil stamp, matched to the material.</p></div>
+      <div class="step"><div class="num">03</div><h3>Pack</h3><p>Custom kitting and inserts, with recyclable dunnage as the default.</p></div>
+      <div class="step"><div class="num">04</div><h3>Ship</h3><p>Regional hubs and pre-cleared customs mean it lands on a desk, not a border.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="trusted">
+  <div class="wrap">
+    <p class="label">Trusted by ops and people teams at</p>
+    <div class="logo-row"><span>Atlas Robotics</span><span>Fenwick &amp; Cole</span><span>Nova Outdoors</span><span>Cedarline</span><span>Harbor &amp; Reede</span><span>Praxis Labs</span></div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="cta-inner">
+    <h2>Ready to put your logo on something people actually keep?</h2>
+    <button class="btn btn-primary">Start a merch program</button>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="30" height="30"><circle cx="20" cy="20" r="18" stroke="#E4C177" stroke-width="2"/><ellipse cx="20" cy="20" rx="18" ry="7" stroke="#ffffff" stroke-width="1.4" opacity="0.85"/><ellipse cx="20" cy="20" rx="7" ry="18" stroke="#ffffff" stroke-width="1.4" opacity="0.85"/><circle cx="20" cy="20" r="3.4" fill="#E4C177"/></svg>
+          <div class="logo-text"><span class="name">NextMerch</span><span class="tag">GLOBAL</span></div>
+        </div>
+        <p>Corporate merch, sourced, branded, and delivered from six regional hubs to 40+ countries.</p>
+      </div>
+      <div class="footer-col-group">
+        <div class="footer-col"><h4>Our Services</h4><a href="#wholesale">Wholesale &amp; retail trade</a><a href="#merchandise">Merchandise</a><a href="#">Custom branding</a><a href="#">Global fulfillment</a></div>
+        <div class="footer-col"><h4>Our Company</h4><a onclick="goAbout('story')">About us</a><a href="#">Careers</a><a href="#contact">Contact</a><a href="#">Sustainability</a></div>
+      </div>
+      <div class="footer-col-group">
+        <div class="footer-col"><h4>Support</h4><a href="#">FAQs</a><a href="#">Shipping &amp; customs</a><a href="#">Returns</a><a href="#">Track an order</a></div>
+        <div class="footer-col"><h4>Legal</h4><a href="#">Terms of service</a><a href="#">Privacy policy</a><a href="#">Cookie policy</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 NextMerch Global. All rights reserved.</span><span>nextmerchglobal.com</span></div>
+  </div>
+</footer>
+
+<script>
+  function setAuthMode(mode){
+    const toggle=document.getElementById('authToggle'), panel=document.getElementById('authPanel');
+    const title=document.getElementById('panelTitle'), sub=document.getElementById('panelSub');
+    const submit=document.getElementById('submitBtn'), switchLine=document.getElementById('switchLine');
+    if(mode==='signup'){
+      toggle.classList.remove('mode-signin'); toggle.classList.add('mode-signup'); panel.classList.add('signup-mode');
+      title.textContent='Create your account'; sub.textContent='Set up a merch program in minutes.'; submit.textContent='Create account';
+      switchLine.innerHTML='Already have an account? <span onclick="setAuthMode(\'signin\')">Sign in</span>';
+    } else {
+      toggle.classList.remove('mode-signup'); toggle.classList.add('mode-signin'); panel.classList.remove('signup-mode');
+      title.textContent='Welcome back'; sub.textContent='Sign in to manage your merch programs.'; submit.textContent='Sign in';
+      switchLine.innerHTML='New here? <span onclick="setAuthMode(\'signup\')">Create an account</span>';
+    }
+    panel.classList.add('open');
+  }
+  document.getElementById('authToggle').addEventListener('click', function(e){ if(e.target.tagName==='BUTTON') return; document.getElementById('authPanel').classList.toggle('open'); });
+  document.querySelectorAll('.auth-toggle button').forEach(btn=>{ btn.addEventListener('click', function(e){ e.stopPropagation(); document.getElementById('authPanel').classList.add('open'); }); });
+
+  function toggleMenu(id){
+    document.querySelectorAll('.nav-item').forEach(el=>{ if(el.id!==id) el.classList.remove('open'); });
+    document.getElementById(id).classList.toggle('open');
+  }
+  document.addEventListener('click', function(e){
+    if(!e.target.closest('.nav-item')) document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('open'));
+    if(!e.target.closest('.auth-widget')) document.getElementById('authPanel').classList.remove('open');
+  });
+
+  const aboutContent = {
+    story:{ title:'Our Story', body:'<p>NextMerch Global started with a simple frustration: ordering branded merch for a distributed team meant juggling five vendors, three customs brokers, and a spreadsheet nobody trusted. We built the sourcing, branding, and fulfillment chain we wished existed, then opened it up to every company running a global team.</p><p>Today that chain spans six regional hubs and reaches more than forty countries, but the starting problem is the same one we solve every day: get the right item, decorated correctly, to the right desk, on time.</p>' },
+    philosophy:{ title:'Our Philosophy', body:'<p>Merch is only good if someone keeps it. We treat every product decision, material, decoration method, packaging, as a question of whether it earns a place in someone\\'s daily life rather than a drawer.</p><ul><li>Fewer, better items over catalogs of filler</li><li>Decoration matched to material, never bolted on</li><li>Logistics designed around the recipient, not the warehouse</li></ul>' },
+    mission:{ title:'Mission Statement', body:'<p>To make sending physical goods across borders as simple and reliable as sending an email, so that distance is never the reason a team feels disconnected from its own brand.</p>' },
+    vision:{ title:'Vision Statement', body:'<p>A world where any company, in any country, can put something real and well-made into the hands of its people and partners, without operations becoming the bottleneck.</p>' },
+    values:{ title:'Core Values', body:'<ul><li><strong>Reliability</strong> — a promised delivery date is a commitment, not an estimate.</li><li><strong>Craft</strong> — the decoration method should suit the material, every time.</li><li><strong>Transparency</strong> — customers see hub status and shipment progress, not a black box.</li><li><strong>Responsibility</strong> — sustainable materials and fair-audited factories by default.</li></ul>' },
+    way:{ title:'The NextMerch Way', body:'<p>Source, brand, pack, ship, in that order, with no step outsourced blind. Every hub follows the same four-stage process so a shipment from Singapore and a shipment from Chicago arrive with the same standard of finish.</p>' }
+  };
+  function setAboutTab(tab){
+    document.querySelectorAll('#aboutTabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+    document.getElementById('aboutPanelTitle').textContent = aboutContent[tab].title;
+    document.getElementById('aboutPanelBody').innerHTML = aboutContent[tab].body;
+  }
+  function goAbout(tab){
+    setAboutTab(tab);
+    document.getElementById('about').scrollIntoView({behavior:'smooth'});
+    document.querySelectorAll('.nav-item').forEach(el=>el.classList.remove('open'));
+  }
+  setAboutTab('story');
+
+  function icon(name, stroke){
+    const icons = {
+      bag:'<path d="M28 35 h44 l-4 40 a5 5 0 0 1 -5 4 H37 a5 5 0 0 1 -5 -4 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/><path d="M38 35 v-8 a12 12 0 0 1 24 0 v8" fill="none" stroke="'+stroke+'" stroke-width="4"/>',
+      mug:'<path d="M25 30 h34 l-3 38 a5 5 0 0 1 -5 4 H33 a5 5 0 0 1 -5 -4 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/><path d="M59 38 h8 a8 8 0 0 1 0 16 h-8" fill="none" stroke="'+stroke+'" stroke-width="4"/>',
+      shirt:'<path d="M35 25 L25 35 l8 8 v32 h34 V43 l8 -8 -10 -10 -8 6 h-14 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/>',
+      bottle:'<rect x="38" y="18" width="14" height="10" rx="2" fill="none" stroke="'+stroke+'" stroke-width="4"/><path d="M34 28 h22 l3 8 v34 a5 5 0 0 1 -5 5 H36 a5 5 0 0 1 -5 -5 V36 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/>',
+      headphones:'<path d="M25 55 v-5 a25 25 0 0 1 50 0 v5" fill="none" stroke="'+stroke+'" stroke-width="4"/><rect x="20" y="53" width="12" height="18" rx="5" fill="none" stroke="'+stroke+'" stroke-width="4"/><rect x="68" y="53" width="12" height="18" rx="5" fill="none" stroke="'+stroke+'" stroke-width="4"/>',
+      notebook:'<rect x="28" y="18" width="44" height="60" rx="4" fill="none" stroke="'+stroke+'" stroke-width="4"/><line x1="36" y1="30" x2="64" y2="30" stroke="'+stroke+'" stroke-width="3"/><line x1="36" y1="40" x2="64" y2="40" stroke="'+stroke+'" stroke-width="3"/><line x1="36" y1="50" x2="52" y2="50" stroke="'+stroke+'" stroke-width="3"/>',
+      backpack:'<path d="M32 40 a18 18 0 0 1 36 0 v28 a6 6 0 0 1 -6 6 H38 a6 6 0 0 1 -6 -6 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/><path d="M38 40 v34 M62 40 v34" stroke="'+stroke+'" stroke-width="3"/>',
+      cap:'<path d="M22 55 a28 16 0 0 1 56 0 Z" fill="none" stroke="'+stroke+'" stroke-width="4"/><path d="M50 39 v-8" stroke="'+stroke+'" stroke-width="4"/>'
+    };
+    return icons[name] || icons.bag;
+  }
+
+  const marqueeItems = [
+    { name:'Insulated tumbler 20oz', price:'$6.40', icon:'mug', bg:'linear-gradient(160deg,#E4C177,#C9963E)', fg:'#3D1653' },
+    { name:'Recycled cotton tote', price:'$3.10', icon:'bag', bg:'linear-gradient(160deg,#9B57C4,#6A2B8D)', fg:'#fff' },
+    { name:'Embroidered polo shirt', price:'$11.90', icon:'shirt', bg:'linear-gradient(160deg,#1F9C82,#0F6E56)', fg:'#fff' },
+    { name:'Steel water bottle', price:'$5.75', icon:'bottle', bg:'linear-gradient(160deg,#4a4553,#221530)', fg:'#fff' },
+    { name:'Wireless earbuds', price:'$14.20', icon:'headphones', bg:'linear-gradient(160deg,#E2703F,#a4502b)', fg:'#fff' },
+    { name:'Kraft-cover notebook', price:'$2.85', icon:'notebook', bg:'linear-gradient(160deg,#efeae2,#c9c2b4)', fg:'#3D1653' },
+    { name:'Canvas backpack', price:'$9.60', icon:'backpack', bg:'linear-gradient(160deg,#6A2B8D,#3D1653)', fg:'#fff' },
+    { name:'Embroidered cap', price:'$4.30', icon:'cap', bg:'linear-gradient(160deg,#C9963E,#8a6425)', fg:'#fff' }
+  ];
+  function renderMarquee(){
+    const track = document.getElementById('marqueeTrack');
+    const doubled = [...marqueeItems, ...marqueeItems];
+    track.innerHTML = doubled.map(it => `
+      <div class="m-card">
+        <div class="icon-box" style="background:${it.bg};">
+          <svg viewBox="0 0 100 100">${icon(it.icon, it.fg)}</svg>
+        </div>
+        <div class="p-name">${it.name}</div>
+        <div class="p-price">${it.price} / unit</div>
+      </div>`).join('');
+  }
+  renderMarquee();
+
+  const shopItems = [
+    { name:'Bulk cotton t-shirts, blank or printed', price:'$2.10 – $4.80', moq:'MOQ 500 units', icon:'shirt', bg:'linear-gradient(160deg,#9B57C4,#6A2B8D)', fg:'#fff' },
+    { name:'Stainless steel tumblers, laser etch ready', price:'$3.40 – $6.90', moq:'MOQ 300 units', icon:'mug', bg:'linear-gradient(160deg,#E4C177,#C9963E)', fg:'#3D1653' },
+    { name:'Canvas tote bags, custom print', price:'$1.20 – $2.90', moq:'MOQ 1000 units', icon:'bag', bg:'linear-gradient(160deg,#1F9C82,#0F6E56)', fg:'#fff' },
+    { name:'Wireless earbud sets, retail boxed', price:'$8.50 – $15.00', moq:'MOQ 200 units', icon:'headphones', bg:'linear-gradient(160deg,#E2703F,#a4502b)', fg:'#fff' },
+    { name:'Kraft notebooks, spiral or bound', price:'$0.90 – $2.30', moq:'MOQ 1000 units', icon:'notebook', bg:'linear-gradient(160deg,#efeae2,#c9c2b4)', fg:'#3D1653' },
+    { name:'Insulated water bottles, 500ml', price:'$2.80 – $5.20', moq:'MOQ 500 units', icon:'bottle', bg:'linear-gradient(160deg,#4a4553,#221530)', fg:'#fff' },
+    { name:'Embroidered caps, adjustable strap', price:'$1.60 – $3.50', moq:'MOQ 500 units', icon:'cap', bg:'linear-gradient(160deg,#C9963E,#8a6425)', fg:'#fff' },
+    { name:'Canvas backpacks, laptop sleeve', price:'$5.90 – $11.40', moq:'MOQ 300 units', icon:'backpack', bg:'linear-gradient(160deg,#6A2B8D,#3D1653)', fg:'#fff' }
+  ];
+  function renderShop(){
+    document.getElementById('shopGrid').innerHTML = shopItems.map(it => `
+      <div class="shop-card">
+        <div class="shop-thumb" style="background:${it.bg};"><svg viewBox="0 0 100 100">${icon(it.icon, it.fg)}</svg></div>
+        <div class="shop-info">
+          <div class="badge-supplier">Verified supplier</div>
+          <div class="s-name">${it.name}</div>
+          <div class="s-price">${it.price}</div>
+          <div class="s-moq">${it.moq}</div>
+          <button class="btn btn-secondary btn-small" style="width:100%;">Contact supplier</button>
+        </div>
+      </div>`).join('');
+  }
+  renderShop();
+
+  const shipments = [
+    { hub:'Chicago', dest:'Toronto, CA', order:'#NM-48213', items:'240 units', status:'departed' },
+    { hub:'Berlin', dest:'Amsterdam, NL', order:'#NM-48219', items:'80 units', status:'customs' },
+    { hub:'Singapore', dest:'Sydney, AU', order:'#NM-48225', items:'560 units', status:'packing' },
+    { hub:'Mexico City', dest:'Bogotá, CO', order:'#NM-48231', items:'120 units', status:'departed' },
+    { hub:'London', dest:'Dublin, IE', order:'#NM-48237', items:'310 units', status:'departed' },
+    { hub:'Singapore', dest:'Tokyo, JP', order:'#NM-48244', items:'95 units', status:'customs' },
+    { hub:'Chicago', dest:'Austin, US', order:'#NM-48250', items:'400 units', status:'packing' },
+    { hub:'Berlin', dest:'Warsaw, PL', order:'#NM-48256', items:'150 units', status:'departed' }
+  ];
+  const statusLabel = { departed:'Departed', customs:'In customs', packing:'Packing' };
+  const boardBody = document.getElementById('boardBody');
+  function renderBoard(list){
+    boardBody.innerHTML = '';
+    list.forEach(s => {
+      const row = document.createElement('div');
+      row.className = 'board-row flip';
+      row.innerHTML = `<span class="hub">${s.hub}</span><span class="dest">${s.dest}</span><span class="mono">${s.order}</span><span>${s.items}</span><span class="status ${s.status}"><span class="dot"></span>${statusLabel[s.status]}</span>`;
+      boardBody.appendChild(row);
+    });
+  }
+  function pickRows(){ return [...shipments].sort(()=>Math.random()-0.5).slice(0,5); }
+  renderBoard(pickRows());
+  setInterval(()=>{ renderBoard(pickRows()); }, 4000);
+</script>
+
+</body>
+</html>
