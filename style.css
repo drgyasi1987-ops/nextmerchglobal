@@ -1,26 +1,76 @@
-/* Navigation dropdown visibility settings */
-.nav-item {
-  position: relative;
-  display: inline-block;
+/* ==========================================================================
+   NEXTMERCH VERTICAL TABS COMPONENT (RIGHT AFTER HEADER)
+   ========================================================================== */
+
+.nm-vertical-tabs-container {
+    background-color: #FFFFFF; /* Snow White */
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    float: left;
+    border-right: 2px solid #E5E5E5; /* Light Grey */
+    padding: 15px 0;
+    font-family: sans-serif;
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  min-width: 240px;
-  background-color: inherit; /* Preserves original navigation colors */
+.nm-tab-item {
+    position: relative;
+    list-style: none;
+    width: 100%;
 }
 
-.nav-item:hover .dropdown-menu {
-  display: block;
+.nm-tab-item > a {
+    display: block;
+    padding: 12px 20px;
+    color: #6A2B8D; /* Corporate Purple */
+    font-weight: 600;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
 }
 
-.dropdown-menu a {
-  display: block;
-  padding: 10px 15px;
-  text-decoration: none;
-  white-space: nowrap;
+.nm-tab-item > a:hover {
+    background-color: #E5E5E5; /* Light Grey */
+    color: #E9C036; /* Saturated Gold */
+    border-left: 4px solid #6A2B8D; /* Corporate Purple */
+}
+
+/* Hidden Dropdown Panel */
+.nm-tab-item .nm-dropdown-panel {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 290px;
+    background-color: #FFFFFF; /* Snow White */
+    border: 1px solid #CCCCCC; /* Industrial Grey */
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Show Dropdown on Hover */
+.nm-tab-item:hover .nm-dropdown-panel {
+    display: block !important;
+}
+
+.nm-dropdown-panel li a {
+    display: block;
+    padding: 10px 20px;
+    color: #B3B3B3; /* Medium Muted Grey */
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.nm-dropdown-panel li a:hover {
+    background-color: #F3DE8A; /* Light Gold */
+    color: #6A2B8D; /* Corporate Purple */
+}
+
+/* Clearfix to preserve original layout & 3D carousel below */
+.nm-layout-clearfix {
+    clear: both;
 }
