@@ -1,52 +1,76 @@
-<!-- INSERT IMMEDIATELY AFTER YOUR HEADER TAG -->
-<div class="nm-vertical-tabs-container">
-  <ul style="padding: 0; margin: 0; list-style: none;">
+<div class="subnav">
+  <div class="subnav-inner">
     
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/index.html">Home</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/about.html">About Us</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/services.html">Services</a></li>
-    
-    <!-- Business Divisions Tab -->
-    <li class="nm-tab-item">
-      <a href="https://www.nextmerchglobal.com/business-divisions.html">Business Divisions</a>
-      <ul class="nm-dropdown-panel">
-        <li><a href="https://www.nextmerchglobal.com/divisions/healthcare-solutions.html" target="_blank">Healthcare Solutions</a></li>
-        <li><a href="https://www.nextmerchglobal.com/divisions/general-supplies.html" target="_blank">General Supplies Solutions</a></li>
-        <li><a href="https://www.nextmerchglobal.com/divisions/educational-supplies.html" target="_blank">Educational Supplies Solutions</a></li>
-        <li><a href="https://www.nextmerchglobal.com/divisions/automobile-solutions.html" target="_blank">Automobile Solutions</a></li>
-      </ul>
-    </li>
+    <div class="nav-item" id="homeNav">
+      <a onclick="toggleMenu('homeNav')">Home <span class="caret">▾</span></a>
+      <div class="mega">
+        <a href="https://www.nextmerchglobal.com/index.html"><span class="dot"></span>Main Dashboard Floor</a>
+        <a href="#board"><span class="dot"></span>Live Network Hub Status</a>
+      </div>
+    </div>
 
-    <!-- Industries Tab -->
-    <li class="nm-tab-item">
-      <a href="#">Industries</a>
-      <ul class="nm-dropdown-panel">
-        <li><a href="https://www.nextmerchglobal.com/industries/individual-buyers.html" target="_blank">Individual Buyers</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/healthcare.html" target="_blank">Healthcare</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/government.html" target="_blank">Government</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/education.html" target="_blank">Education</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/construction.html" target="_blank">Construction</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/mining.html" target="_blank">Mining</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/manufacturing.html" target="_blank">Manufacturing</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/hospitality.html" target="_blank">Hospitality</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/agriculture.html" target="_blank">Agriculture</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/financial-institutions.html" target="_blank">Financial Institutions</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/transportation.html" target="_blank">Transportation</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/oil-gas.html" target="_blank">Oil & Gas</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/ngos-development.html" target="_blank">NGOs & Development Organizations</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/smes.html" target="_blank">SMEs</a></li>
-        <li><a href="https://www.nextmerchglobal.com/industries/corporate-organizations.html" target="_blank">Corporate Organizations</a></li>
-      </ul>
-    </li>
+    <div class="nav-item" id="aboutNav">
+      <a onclick="toggleMenu('aboutNav')">About Us <span class="caret">▾</span></a>
+      <div class="mega">
+        <a onclick="goAbout('story')"><span class="dot"></span>Our Story</a>
+        <a onclick="goAbout('philosophy')"><span class="dot"></span>Our Philosophy</a>
+        <a onclick="goAbout('mission')"><span class="dot"></span>Mission Statement</a>
+        <a onclick="goAbout('vision')"><span class="dot"></span>Vision Statement</a>
+        <a onclick="goAbout('values')"><span class="dot"></span>Core Values</a>
+        <a onclick="goAbout('way')"><span class="dot"></span>The NextMerch Way</a>
+        <a onclick="goAbout('why')"><span class="dot"></span>Why Choose Us</a>
+      </div>
+    </div>
 
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/projects.html">Projects & Case Studies</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/blog.html">News</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/careers.html">Careers</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/resources.html">Resources</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/contact.html">Contact</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/privacy-policy.html">Privacy Policy</a></li>
-    <li class="nm-tab-item"><a href="https://www.nextmerchglobal.com/terms-conditions.html">Terms & Conditions</a></li>
-  </ul>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/services.html">Services</a></div>
+
+    <div class="nav-item" id="bizNav">
+      <a onclick="toggleMenu('bizNav')">Business Activities <span class="caret">▾</span></a>
+      <div class="mega">
+        <a onclick="goBiz('wholesale')"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
+        <a onclick="goBiz('procurement')"><span class="dot"></span>Procurement &amp; Sourcing Services</a>
+        <a onclick="goBiz('distribution')"><span class="dot"></span>Distribution &amp; Supply Chain</a>
+      </div>
+    </div>
+
+    <div class="nav-item" id="divNav">
+      <a onclick="toggleMenu('divNav')">Business Divisions <span class="caret">▾</span></a>
+      <div class="mega">
+        <a href="https://www.nextmerchglobal.com/divisions/healthcare-solutions.html" target="_blank"><span class="dot"></span>Healthcare Solutions</a>
+        <a href="https://www.nextmerchglobal.com/divisions/general-supplies.html" target="_blank"><span class="dot"></span>General Supplies Solutions</a>
+        <a href="https://www.nextmerchglobal.com/divisions/educational-supplies.html" target="_blank"><span class="dot"></span>Educational Supplies Solutions</a>
+        <a href="https://www.nextmerchglobal.com/divisions/automobile-solutions.html" target="_blank"><span class="dot"></span>Automobile Solutions</a>
+      </div>
+    </div>
+
+    <div class="nav-item" id="indNav">
+      <a onclick="toggleMenu('indNav')">Industries <span class="caret">▾</span></a>
+      <div class="mega" style="min-width: 320px; max-height: 400px; overflow-y: auto;">
+        <a href="https://www.nextmerchglobal.com/industries/individual-buyers.html" target="_blank"><span class="dot"></span>Individual Buyers</a>
+        <a href="https://www.nextmerchglobal.com/industries/healthcare.html" target="_blank"><span class="dot"></span>Healthcare Sector</a>
+        <a href="https://www.nextmerchglobal.com/industries/government.html" target="_blank"><span class="dot"></span>Government Agencies</a>
+        <a href="https://www.nextmerchglobal.com/industries/education.html" target="_blank"><span class="dot"></span>Education Sector</a>
+        <a href="https://www.nextmerchglobal.com/industries/construction.html" target="_blank"><span class="dot"></span>Construction Sector</a>
+        <a href="https://www.nextmerchglobal.com/industries/mining.html" target="_blank"><span class="dot"></span>Mining Operations</a>
+        <a href="https://www.nextmerchglobal.com/industries/manufacturing.html" target="_blank"><span class="dot"></span>Manufacturing Units</a>
+        <a href="https://www.nextmerchglobal.com/industries/hospitality.html" target="_blank"><span class="dot"></span>Hospitality Trade</a>
+        <a href="https://www.nextmerchglobal.com/industries/agriculture.html" target="_blank"><span class="dot"></span>Agriculture Sector</a>
+        <a href="https://www.nextmerchglobal.com/industries/financial-institutions.html" target="_blank"><span class="dot"></span>Financial Institutions</a>
+        <a href="https://www.nextmerchglobal.com/industries/transportation.html" target="_blank"><span class="dot"></span>Transportation & Logistics</a>
+        <a href="https://www.nextmerchglobal.com/industries/oil-gas.html" target="_blank"><span class="dot"></span>Oil &amp; Gas Plantations</a>
+        <a href="https://www.nextmerchglobal.com/industries/ngos-development.html" target="_blank"><span class="dot"></span>NGOs &amp; Development</a>
+        <a href="https://www.nextmerchglobal.com/industries/smes.html" target="_blank"><span class="dot"></span>SMEs Fleet</a>
+        <a href="https://www.nextmerchglobal.com/industries/corporate-organizations.html" target="_blank"><span class="dot"></span>Corporate Organizations</a>
+      </div>
+    </div>
+
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/projects.html">Projects &amp; Case Studies</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/blog.html">News</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/careers.html">Careers</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/resources.html">Resources</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/contact.html">Contact Us</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/privacy-policy.html">Privacy Policy</a></div>
+    <div class="nav-item"><a href="https://www.nextmerchglobal.com/terms-conditions.html">Terms &amp; Conditions</a></div>
+
+  </div>
 </div>
-<div class="nm-layout-clearfix"></div>
-<!-- DO NOT TOUCH THE CAROUSEL OR OTHER ELEMENTS LAYOUT CODES UNDER THIS -->
