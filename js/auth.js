@@ -1,48 +1,51 @@
-// auth.js
-// Sign in / Sign up toggle widget logic for the site header.
+/**
+ * NextMerch Global - Authentication & Portal Session Controller
+ */
+const NextAuth = (function () {
+    "use strict";
 
-function setAuthMode(mode){
-  const toggle = document.getElementById('authToggle');
-  const panel = document.getElementById('authPanel');
-  const title = document.getElementById('panelTitle');
-  const sub = document.getElementById('panelSub');
-  const submit = document.getElementById('submitBtn');
-  const switchLine = document.getElementById('switchLine');
+    let currentUserSession = null;
 
-  if(mode === 'signup'){
-    toggle.classList.remove('mode-signin');
-    toggle.classList.add('mode-signup');
-    panel.classList.add('signup-mode');
-    title.textContent = 'Create your account';
-    sub.textContent = 'Set up a sourcing account in minutes.';
-    submit.textContent = 'Create account';
-    switchLine.innerHTML = 'Already have an account? <span onclick="setAuthMode(\'signin\')">Sign in</span>';
-  } else {
-    toggle.classList.remove('mode-signup');
-    toggle.classList.add('mode-signin');
-    panel.classList.remove('signup-mode');
-    title.textContent = 'Welcome back';
-    sub.textContent = 'Sign in to manage your account.';
-    submit.textContent = 'Sign in';
-    switchLine.innerHTML = 'New here? <span onclick="setAuthMode(\'signup\')">Create an account</span>';
-  }
-  panel.classList.add('open');
-}
+    return {
+        login: async function (email, password) {
+            if (!email || !password) {
+                return { success: false, error: "Credentials are required." };
+            }
 
-document.getElementById('authToggle').addEventListener('click', function(e){
-  if(e.target.tagName === 'BUTTON') return;
-  document.getElementById('authPanel').classList.toggle('open');
-});
+            try {
+                // Production-ready submission logic safely routed to the python endpoint
+                const response = await fetch("/api/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
 
-document.querySelectorAll('.auth-toggle button').forEach(btn => {
-  btn.addEventListener('click', function(e){
-    e.stopPropagation();
-    document.getElementById('authPanel').classList.add('open');
-  });
-});
+                const data = await response.json();
 
-document.addEventListener('click', function(e){
-  if(!e.target.closest('.auth-widget')){
-    document.getElementById('authPanel').classList.remove('open');
-  }
-});
+                if (response.ok && data.token) {
+                    currentUserSession = data.user;
+                    localStorage.setItem("nm_session_token", data.token);
+                    return { success: true, user: data.user };
+                } else {
+                    return { success: false, error: data.message || "Invalid credentials." };
+                }
+            } catch (err) {
+                return { success: false, error: "Network error occurred during authentication." };
+            }
+        },
+
+        logout: function () {
+            currentUserSession = null;
+            localStorage.removeItem("nm_session_token");
+            window.location.href = "/index.html";
+        },
+
+        getSession: function () {
+            return currentUserSession;
+        },
+
+        isAuthenticated: function () {
+            return !!localStorage.getItem("nm_session_token");
+        }
+    };
+})();
