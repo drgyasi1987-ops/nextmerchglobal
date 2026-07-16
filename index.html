@@ -4,9 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NextMerch Global Ltd. — Source Smart, Deliver Faster</title>
+<meta name="description" content="NextMerch Global Ltd. delivers smarter sourcing, reliable procurement, and seamless global delivery for businesses, governments, NGOs, and individual buyers.">
+<meta name="theme-color" content="#6A2B8D">
+<link rel="canonical" href="https://nextmerchglobal.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="NextMerch Global Ltd. — Source Smart, Deliver Faster">
+<meta property="og:description" content="Smarter sourcing, reliable procurement, and seamless delivery for businesses, governments, NGOs, and individual buyers.">
+<meta property="og:url" content="https://nextmerchglobal.com/">
+<meta name="twitter:card" content="summary">
+
+<!-- Self-contained favicon (no external file dependency) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' rx='8' fill='%236A2B8D'/%3E%3Ctext x='18' y='25' text-anchor='middle' font-family='Arial, sans-serif' font-weight='700' font-size='18' fill='white'%3EN%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NextMerch Global Ltd.",
+  "url": "https://nextmerchglobal.com",
+  "slogan": "Source Smart. Deliver Faster.",
+  "description": "Global sourcing, procurement, and supply chain solutions for individuals, businesses, NGOs, and governments."
+}
+</script>
+
 <style>
   :root {
     --purple: #6A2B8D;
@@ -27,7 +53,19 @@
   h1, h2, h3, .display { font-family: 'Sora', sans-serif; }
   a { color: inherit; text-decoration: none; }
   ul { list-style: none; }
+  img { max-width: 100%; }
   .wrap { max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+
+  /* Accessibility helpers */
+  .skip-link {
+    position: absolute; left: -9999px; top: 0; z-index: 1000002;
+    background: var(--gold); color: var(--plum); padding: 12px 20px;
+    font-weight: 700; font-size: 14px; border-radius: 0 0 8px 0;
+  }
+  .skip-link:focus { left: 0; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 4px;
+  }
 
   header {
     position: relative; 
@@ -35,23 +73,26 @@
     background: linear-gradient(180deg, #9B57C4 0%, var(--purple) 45%, #3D1653 100%);
     box-shadow: 0 6px 24px rgba(30,8,45,0.35);
   }
-  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 32px; max-width: 1220px; margin: 0 auto; }
-  
-  /* WHITE LOGO CONTAINER WITH FIXED DIMENSIONS to prevent collapse if image loads slowly */
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 32px; max-width: 1220px; margin: 0 auto; gap: 16px; }
+
+  /* BRAND MARK + WORDMARK (self-contained SVG, no external logo file to go missing/blank) */
   .logo-wrapper {
     background: #FFFFFF;
-    padding: 8px 20px;
-    border-radius: 8px;
+    padding: 8px 18px;
+    border-radius: 10px;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 11px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    min-width: 150px;
     min-height: 55px;
   }
-  .logo-img { height: 55px; width: auto; object-fit: contain; display: block; }
+  .logo-mark { flex-shrink: 0; display: flex; }
+  .logo-mark svg { display: block; }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .brand-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 17.5px; color: var(--plum); letter-spacing: -0.01em; white-space: nowrap; }
+  .brand-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.13em; color: var(--purple); text-transform: uppercase; margin-top: 2px; white-space: nowrap; }
 
-  .auth-widget { display: flex; gap: 10px; }
+  .auth-widget { display: flex; gap: 10px; flex-shrink: 0; }
   .auth-btn { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; }
   .auth-btn.active { background: var(--gold); color: var(--plum); border-color: var(--gold); }
 
@@ -59,17 +100,37 @@
   .subnav { 
     position: sticky; 
     top: 0; 
-    z-index: 999999 !important; 
+    z-index: 999999; 
     background: rgba(255,255,255,0.97); 
     backdrop-filter: blur(10px); 
     border-bottom: 1px solid var(--line); 
     box-shadow: 0 4px 20px rgba(29,21,38,0.08); 
   }
-  .subnav-inner { display: flex; align-items: center; gap: 8px; max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+  .subnav-inner { display: flex; align-items: center; max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+  .nav-items { display: flex; align-items: center; gap: 8px; }
   .nav-item { position: relative; }
-  .nav-item > a { display: inline-flex; align-items: center; gap: 6px; padding: 18px 20px; font-size: 14.5px; font-weight: 600; color: var(--ink-soft); border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; }
-  .nav-item > a:hover, .nav-item.open > a { color: var(--purple); border-color: var(--gold); background: rgba(106,43,141,0.04); }
+  .nav-item > a, .nav-item > button.nav-trigger {
+    display: inline-flex; align-items: center; gap: 6px; padding: 18px 20px;
+    font-size: 14.5px; font-weight: 600; color: var(--ink-soft);
+    border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap;
+    transition: all 0.2s ease; background: none; border-left: none; border-right: none; border-top: none;
+    font-family: inherit;
+  }
+  .nav-item > a:hover, .nav-item.open > a,
+  .nav-item > button.nav-trigger:hover, .nav-item.open > button.nav-trigger {
+    color: var(--purple); border-bottom-color: var(--gold); background: rgba(106,43,141,0.04);
+  }
   .caret { font-size: 9px; margin-left: 2px; }
+
+  /* Mobile nav toggle */
+  .nav-toggle {
+    display: none; flex-direction: column; gap: 5px; background: none; border: none;
+    cursor: pointer; padding: 12px 8px; margin-right: 4px;
+  }
+  .nav-toggle span { width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   
   /* DROPDOWNS */
   .mega { 
@@ -87,12 +148,12 @@
     visibility: hidden; 
     transform: translateY(8px); 
     transition: all 0.2s ease; 
-    z-index: 1000000 !important; 
+    z-index: 1000000; 
   }
   .nav-item.open .mega { opacity: 1; visibility: visible; transform: translateY(0); }
   .mega a { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--ink); }
   .mega a:hover { background: var(--light-grey); color: var(--purple); }
-  .mega .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .mega .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
 
   /* HERO SECTION */
   .hero { padding: 80px 0; background: #F4F3F6; position: relative; z-index: 1; }
@@ -116,7 +177,7 @@
   .slide-caption p { font-size: 13.5px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 3px rgba(0,0,0,0.4); margin: 0; }
   
   .carousel-dots { position: absolute; bottom: 15px; left: 24px; z-index: 10; display: flex; gap: 8px; }
-  .dot-indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.45); cursor: pointer; transition: all 0.3s; }
+  .dot-indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.45); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
   .dot-indicator.active { background: var(--gold); width: 22px; border-radius: 4px; }
 
   /* TWO-COLUMN SIDE-BY-SIDE INDUSTRIES LAYOUT */
@@ -139,70 +200,150 @@
   .footer-col a { display: block; font-size: 13.5px; color: var(--light-grey); margin-bottom: 10px; transition: color 0.2s; }
   .footer-col a:hover { color: var(--gold-light); }
   
-  .sub-drop-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: transparent; border: none; color: var(--light-grey); font-size: 13.5px; padding: 4px 0; margin-bottom: 6px; cursor: pointer; }
+  .sub-drop-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: transparent; border: none; color: var(--light-grey); font-size: 13.5px; padding: 4px 0; margin-bottom: 6px; cursor: pointer; font-family: inherit; }
   .sub-drop-toggle:hover { color: var(--gold-light); }
   .sub-drop-menu { max-height: 0; overflow: hidden; transition: max-height 0.25s ease-out; background: rgba(0,0,0,0.2); border-radius: 6px; padding: 0 12px; }
   .sub-drop-menu.open { max-height: 200px; padding: 8px 12px; margin-bottom: 10px; }
   .sub-drop-menu a { font-size: 12.5px !important; margin-bottom: 8px !important; color: var(--muted-grey) !important; }
 
-  .footer-social-strip { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .footer-social-strip { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap; }
   .social-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--muted-grey); }
   .social-links { display: flex; gap: 20px; }
   .social-links a { font-size: 13.5px; font-weight: 600; color: var(--gold-light); }
   .social-links a:hover { text-decoration: underline; }
 
-  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted-grey); }
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted-grey); flex-wrap: wrap; gap: 8px; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 900px) {
+    .header-inner { padding: 10px 20px; }
+    .brand-name { font-size: 15.5px; }
+    .brand-tag { font-size: 8px; }
+    .auth-btn { padding: 7px 12px; font-size: 12px; }
+
+    .nav-toggle { display: flex; }
+    .subnav-inner { padding: 0 20px; position: relative; }
+    .nav-items {
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: #fff; max-height: 0; overflow: hidden;
+      box-shadow: 0 16px 32px rgba(29,21,38,0.15);
+      transition: max-height 0.3s ease;
+    }
+    .nav-items.open { max-height: 80vh; overflow-y: auto; }
+    .nav-item { width: 100%; }
+    .nav-item > a, .nav-item > button.nav-trigger { width: 100%; padding: 16px 20px; border-bottom: 1px solid var(--line); justify-content: space-between; }
+    .mega {
+      position: static; box-shadow: none; border: none; border-radius: 0;
+      opacity: 1; visibility: visible; transform: none;
+      max-height: 0; overflow: hidden; padding: 0; transition: max-height 0.25s ease;
+      background: var(--light-grey);
+    }
+    .nav-item.open .mega { max-height: 400px; padding: 8px; }
+
+    .hero { padding: 48px 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero h1 { font-size: 30px; }
+    .carousel-container { height: 280px; }
+
+    .section-block { padding: 48px 0; }
+    .industries-grid { grid-template-columns: 1fr; gap: 32px; }
+    .industries-photo { height: 320px; }
+    .list-layout { padding: 28px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-column-container { grid-template-rows: auto; grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 0 20px; }
+    .btn-secondary { margin-left: 0; margin-top: 10px; }
+    .footer-column-container { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    .footer-social-strip { gap: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .slide { transition: none; }
+    .nav-toggle span, .nav-items, .mega, .sub-drop-menu { transition: none; }
+  }
 </style>
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to main content</a>
+
 <header>
   <div class="header-inner">
     <div class="logo-wrapper">
-      <img src="logo.png" alt="NextMerch Global Ltd Logo" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerText='NextMerch Global Ltd.'" />
+      <div class="logo-mark">
+        <svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="NextMerch Global Ltd. logo">
+          <defs>
+            <linearGradient id="navLogoGrad" x1="0" y1="0" x2="36" y2="36">
+              <stop offset="0" stop-color="#9B57C4"/>
+              <stop offset="1" stop-color="#6A2B8D"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="9" fill="url(#navLogoGrad)"/>
+          <text x="18" y="25" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="17" fill="#FFFFFF">N</text>
+          <path d="M24.5 10.5H28.5V14.5" stroke="#E9C036" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M28.5 10.5L22 17" stroke="#E9C036" stroke-width="2" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">NextMerch Global Ltd.</span>
+        <span class="brand-tag">Source Smart · Deliver Faster</span>
+      </div>
     </div>
     <div class="auth-widget">
-      <button class="auth-btn active">Sign in</button>
-      <button class="auth-btn">Sign up</button>
+      <button class="auth-btn active" type="button">Sign in</button>
+      <button class="auth-btn" type="button">Sign up</button>
     </div>
   </div>
 </header>
 
 <div class="subnav">
   <div class="subnav-inner">
-    <div class="nav-item" id="homeTab"><a href="index.html">Home</a></div>
-    <div class="nav-item" id="aboutTab">
-      <a onclick="toggleMenu(event, 'aboutTab')">About Us <span class="caret">▼</span></a>
-      <div class="mega">
-        <a href="about-us.html"><span class="dot"></span>Company Overview</a>
-        <a href="about-us.html#story"><span class="dot"></span>Our Story</a>
-        <a href="about-us.html#mission"><span class="dot"></span>Mission Statement</a>
-        <a href="about-us.html#vision"><span class="dot"></span>Vision Statement</a>
-        <a href="about-us.html#values"><span class="dot"></span>Core Values</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-items" id="mainNav" aria-label="Primary">
+      <div class="nav-item" id="homeTab"><a href="index.html">Home</a></div>
+      <div class="nav-item" id="aboutTab">
+        <button class="nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret" aria-hidden="true">▼</span></button>
+        <div class="mega">
+          <a href="about-us.html"><span class="dot"></span>Company Overview</a>
+          <a href="about-us.html#story"><span class="dot"></span>Our Story</a>
+          <a href="about-us.html#mission"><span class="dot"></span>Mission Statement</a>
+          <a href="about-us.html#vision"><span class="dot"></span>Vision Statement</a>
+          <a href="about-us.html#values"><span class="dot"></span>Core Values</a>
+        </div>
       </div>
-    </div>
-    <div class="nav-item" id="servicesTab">
-      <a onclick="toggleMenu(event, 'servicesTab')">Services <span class="caret">▼</span></a>
-      <div class="mega">
-        <a href="services/wholesale.html"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
-        <a href="services/procurement.html"><span class="dot"></span>Procurement &amp; Sourcing</a>
-        <a href="services/supply-chain.html"><span class="dot"></span>Distribution &amp; Supply Chain</a>
+      <div class="nav-item" id="servicesTab">
+        <button class="nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret" aria-hidden="true">▼</span></button>
+        <div class="mega">
+          <a href="services/wholesale.html"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
+          <a href="services/procurement.html"><span class="dot"></span>Procurement &amp; Sourcing</a>
+          <a href="services/supply-chain.html"><span class="dot"></span>Distribution &amp; Supply Chain</a>
+        </div>
       </div>
-    </div>
-    <div class="nav-item" id="bizTab">
-      <a onclick="toggleMenu(event, 'bizTab')">Business Divisions <span class="caret">▼</span></a>
-      <div class="mega">
-        <a href="divisions/healthcare-solutions.html"><span class="dot"></span>Healthcare Solutions</a>
-        <a href="divisions/general-supplies.html"><span class="dot"></span>General Supplies Solutions</a>
-        <a href="divisions/educational-supplies.html"><span class="dot"></span>Educational Supplies Solutions</a>
-        <a href="divisions/automobile-solutions.html"><span class="dot"></span>Automobile Solutions</a>
+      <div class="nav-item" id="bizTab">
+        <button class="nav-trigger" type="button" aria-haspopup="true" aria-expanded="false">Business Divisions <span class="caret" aria-hidden="true">▼</span></button>
+        <div class="mega">
+          <a href="divisions/healthcare-solutions.html"><span class="dot"></span>Healthcare Solutions</a>
+          <a href="divisions/general-supplies.html"><span class="dot"></span>General Supplies Solutions</a>
+          <a href="divisions/educational-supplies.html"><span class="dot"></span>Educational Supplies Solutions</a>
+          <a href="divisions/automobile-solutions.html"><span class="dot"></span>Automobile Solutions</a>
+        </div>
       </div>
-    </div>
-    <div class="nav-item" id="blogTab"><a href="blog.html">Blog</a></div>
-    <div class="nav-item" id="contactTab"><a href="contact.html">Contact</a></div>
+      <div class="nav-item" id="blogTab"><a href="blog.html">Blog</a></div>
+      <div class="nav-item" id="contactTab"><a href="contact.html">Contact</a></div>
+    </nav>
   </div>
 </div>
 
+<main id="main">
 <section class="hero" id="home">
   <div class="wrap hero-grid">
     <div>
@@ -212,11 +353,11 @@
       <a href="services/wholesale.html" class="btn btn-secondary">Explore Our Services</a>
     </div>
     
-    <div class="carousel-container">
+    <div class="carousel-container" id="heroCarousel" tabindex="0" role="region" aria-roledescription="carousel" aria-label="NextMerch Global Ltd. highlights">
       <div class="carousel-slides" id="carouselSlides">
         
         <div class="slide active">
-          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80" alt="Ship with containers at sea">
+          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80" alt="Ship with containers at sea" loading="eager" fetchpriority="high">
           <div class="slide-caption">
             <h4>Global Transit Networks</h4>
             <p>Reliable ocean freight forwarding bridging global destinations.</p>
@@ -224,15 +365,15 @@
         </div>
 
         <div class="slide">
-          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Harbour worker smiling happily with helmet">
+          <img src="https://images.unsplash.com/photo-1759272840712-c7e5ea852367?auto=format&fit=crop&w=600&q=80" alt="Aerial view of a busy shipping port container yard" loading="lazy">
           <div class="slide-caption">
-            <h4>Dedicated Port Staff</h4>
-            <p>On-the-ground support ensuring seamless handoffs and security.</p>
+            <h4>Port &amp; Terminal Operations</h4>
+            <p>Coordinated container handling across major global ports.</p>
           </div>
         </div>
 
         <div class="slide">
-          <img src="https://images.unsplash.com/photo-1521791136364-72864700229b?auto=format&fit=crop&w=600&q=80" alt="Governments source quality products">
+          <img src="https://images.unsplash.com/photo-1521791136364-72864700229b?auto=format&fit=crop&w=600&q=80" alt="Governments source quality products" loading="lazy">
           <div class="slide-caption">
             <h4>Government Level Procurement</h4>
             <p>Serving institutional entities with certified bulk shipments.</p>
@@ -240,7 +381,7 @@
         </div>
 
         <div class="slide">
-          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Supply solution">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Supply solution" loading="lazy">
           <div class="slide-caption">
             <h4>Strategic Supply Chain Solutions</h4>
             <p>Maximizing product movement velocity with absolute accountability.</p>
@@ -248,7 +389,7 @@
         </div>
 
         <div class="slide">
-          <img src="https://images.unsplash.com/photo-1556761175-b813d53a362d?auto=format&fit=crop&w=600&q=80" alt="Officers doing paperwork happily">
+          <img src="https://images.unsplash.com/photo-1556761175-b813d53a362d?auto=format&fit=crop&w=600&q=80" alt="Officers doing paperwork happily" loading="lazy">
           <div class="slide-caption">
             <h4>Compliance &amp; Trade Coordination</h4>
             <p>Our paperwork specialists process export documentation swiftly.</p>
@@ -256,13 +397,7 @@
         </div>
 
       </div>
-      <div class="carousel-dots" id="carouselDots">
-        <span class="dot-indicator active" onclick="setSlide(0)"></span>
-        <span class="dot-indicator" onclick="setSlide(1)"></span>
-        <span class="dot-indicator" onclick="setSlide(2)"></span>
-        <span class="dot-indicator" onclick="setSlide(3)"></span>
-        <span class="dot-indicator" onclick="setSlide(4)"></span>
-      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
     </div>
 
   </div>
@@ -271,7 +406,7 @@
 <section class="section-block" id="industries">
   <div class="wrap industries-grid">
     <div class="industries-photo">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" alt="Smiling clean-shaven Ghanaian business executive in formal suit" />
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" alt="Smiling clean-shaven Ghanaian business executive in formal suit" loading="lazy" />
     </div>
     <div class="list-layout">
       <h3>Industries We Serve</h3>
@@ -290,6 +425,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
@@ -297,7 +433,7 @@
       
       <div class="footer-brand">
         <div class="logo-text">
-          <span class="name" style="color:#fff; font-weight:700; font-size:18px;">NEXTMERCH GLOBAL LTD.</span>
+          <span class="name" style="color:#fff; font-weight:700; font-size:18px;">NEXTMERCH GLOBAL LTD.</span><br>
           <span class="tag" style="color:var(--gold); font-size:10px;">"Source Smart. Deliver Faster."</span>
         </div>
         <p>Intelligent operational movement bridging supply chains globally.</p>
@@ -325,8 +461,8 @@
         <div class="footer-col">
           <h4>Resources</h4>
           <a href="#">FAQ</a>
-          <button class="sub-drop-toggle" onclick="toggleSubDrop(event)">
-            <span>Download Centre</span> <span style="font-size:9px;">▼</span>
+          <button class="sub-drop-toggle" id="downloadToggleBtn" type="button" aria-expanded="false" aria-controls="downloadSubDrop">
+            <span>Download Centre</span> <span style="font-size:9px;" aria-hidden="true">▼</span>
           </button>
           <div class="sub-drop-menu" id="downloadSubDrop">
             <a href="#">Product Catalogues</a>
@@ -348,9 +484,9 @@
     <div class="footer-social-strip">
       <span class="social-head">Follow us on</span>
       <div class="social-links">
-        <a href="#" target="_blank">Facebook</a>
-        <a href="#" target="_blank">Instagram</a>
-        <a href="#" target="_blank">Twitter (X)</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">Twitter (X)</a>
       </div>
     </div>
 
@@ -361,52 +497,137 @@
 </footer>
 
 <script>
-  function toggleMenu(event, id) {
-    event.stopPropagation();
-    const item = document.getElementById(id);
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
-    if (!isOpen) {
-      item.classList.add('open');
+(function () {
+  'use strict';
+
+  /* ---------- Mobile nav toggle ---------- */
+  var navToggle = document.getElementById('navToggle');
+  var mainNav = document.getElementById('mainNav');
+
+  function closeAllDropdowns() {
+    var open = document.querySelectorAll('.nav-item.open');
+    for (var i = 0; i < open.length; i++) {
+      open[i].classList.remove('open');
+      var trigger = open[i].querySelector('.nav-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
     }
   }
 
-  function toggleSubDrop(event) {
-    event.stopPropagation();
-    const subMenu = document.getElementById('downloadSubDrop');
-    subMenu.classList.toggle('open');
+  function closeMobileMenu() {
+    mainNav.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
   }
 
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+  navToggle.addEventListener('click', function () {
+    var isOpen = mainNav.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+    if (!isOpen) closeAllDropdowns();
   });
 
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot-indicator');
-  const totalSlides = slides.length;
-
-  function setSlide(index) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    
-    currentSlide = index;
-    
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
+  var triggers = document.querySelectorAll('.nav-trigger');
+  for (var t = 0; t < triggers.length; t++) {
+    triggers[t].addEventListener('click', function (event) {
+      event.stopPropagation();
+      var item = event.currentTarget.closest('.nav-item');
+      var isOpen = item.classList.contains('open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        item.classList.add('open');
+        event.currentTarget.setAttribute('aria-expanded', 'true');
+      }
+    });
   }
 
-  function nextSlide() {
-    let next = (currentSlide + 1) % totalSlides;
-    setSlide(next);
-  }
+  document.addEventListener('click', closeAllDropdowns);
 
-  let slideInterval = setInterval(nextSlide, 4500);
-
-  document.getElementById('carouselDots').addEventListener('click', () => {
-    clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 5000);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeAllDropdowns();
+      if (mainNav.classList.contains('open')) closeMobileMenu();
+    }
   });
+
+  var navLinks = mainNav.querySelectorAll('a[href]');
+  for (var n = 0; n < navLinks.length; n++) {
+    navLinks[n].addEventListener('click', function () {
+      if (window.matchMedia('(max-width: 900px)').matches) closeMobileMenu();
+    });
+  }
+
+  /* ---------- Footer "Download Centre" toggle ---------- */
+  var subDropToggle = document.getElementById('downloadToggleBtn');
+  var subDropMenu = document.getElementById('downloadSubDrop');
+  if (subDropToggle && subDropMenu) {
+    subDropToggle.addEventListener('click', function (event) {
+      event.stopPropagation();
+      var isOpen = subDropMenu.classList.toggle('open');
+      subDropToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
+  /* ---------- Carousel ---------- */
+  var track = document.getElementById('carouselSlides');
+  var dotsWrap = document.getElementById('carouselDots');
+  var carousel = document.getElementById('heroCarousel');
+  var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var current = 0;
+  var timer = null;
+
+  slides.forEach(function (slide, i) {
+    var dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'dot-indicator' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Show slide ' + (i + 1) + ' of ' + slides.length);
+    dot.addEventListener('click', function () {
+      goToSlide(i);
+      resetInterval();
+    });
+    dotsWrap.appendChild(dot);
+  });
+
+  var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.dot-indicator'));
+
+  function goToSlide(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  function nextSlide() { goToSlide((current + 1) % slides.length); }
+  function prevSlide() { goToSlide((current - 1 + slides.length) % slides.length); }
+
+  function startInterval() {
+    if (reduceMotion) return;
+    timer = setInterval(nextSlide, 4500);
+  }
+  function resetInterval() {
+    clearInterval(timer);
+    startInterval();
+  }
+
+  startInterval();
+
+  if (carousel) {
+    carousel.addEventListener('mouseenter', function () { clearInterval(timer); });
+    carousel.addEventListener('mouseleave', startInterval);
+    carousel.addEventListener('focusin', function () { clearInterval(timer); });
+    carousel.addEventListener('focusout', startInterval);
+    carousel.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowRight') { nextSlide(); resetInterval(); }
+      if (event.key === 'ArrowLeft') { prevSlide(); resetInterval(); }
+    });
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) clearInterval(timer);
+    else resetInterval();
+  });
+})();
 </script>
 </body>
 </html>
