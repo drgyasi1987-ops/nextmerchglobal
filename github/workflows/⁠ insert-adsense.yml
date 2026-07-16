@@ -1,0 +1,41 @@
+name: Auto Inject AdSense Code
+
+on:
+  push:
+    branches:
+      - main  # Runs automatically whenever you push code to the main branch
+
+permissions:
+  contents: write
+
+jobs:
+  inject-adsense:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Inject AdSense before closing head tag
+        run: |
+          ADSENSE_CODE='<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646890852607153" crossorigin="anonymous"></script>'
+          
+          # Find all HTML files recursively and insert the code right before </head>
+          # It only inserts the code if it doesn't already exist in the file.
+          find . -name "*.html" | while read -r file; do
+            if ! grep -q "ca-pub-3646890852607153" "$file"; then
+              echo "Injecting AdSense into $file"
+              # Replace </head> with the Adsense script followed by </head>
+              sed -i "s|<\/head>|${ADSENSE_CODE}\n<\/head>|g" "$file"
+            else
+              echo "AdSense already present in $file. Skipping."
+            fi
+          done
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          # Only commit if changes were made to avoid failing the build
+          git diff-index --quiet HEAD || git commit -m "Auto-inject AdSense verification snippet to pages"
+          git push origin main
