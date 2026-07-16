@@ -37,7 +37,7 @@
   }
   .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 32px; max-width: 1220px; margin: 0 auto; }
   
-  /* WHITE LOGO CONTAINER */
+  /* WHITE LOGO CONTAINER WITH FIXED DIMENSIONS to prevent collapse if image loads slowly */
   .logo-wrapper {
     background: #FFFFFF;
     padding: 8px 20px;
@@ -46,6 +46,8 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 150px;
+    min-height: 55px;
   }
   .logo-img { height: 55px; width: auto; object-fit: contain; display: block; }
 
@@ -58,4 +60,353 @@
     position: sticky; 
     top: 0; 
     z-index: 999999 !important; 
-    background: rgba(2
+    background: rgba(255,255,255,0.97); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid var(--line); 
+    box-shadow: 0 4px 20px rgba(29,21,38,0.08); 
+  }
+  .subnav-inner { display: flex; align-items: center; gap: 8px; max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+  .nav-item { position: relative; }
+  .nav-item > a { display: inline-flex; align-items: center; gap: 6px; padding: 18px 20px; font-size: 14.5px; font-weight: 600; color: var(--ink-soft); border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; }
+  .nav-item > a:hover, .nav-item.open > a { color: var(--purple); border-color: var(--gold); background: rgba(106,43,141,0.04); }
+  .caret { font-size: 9px; margin-left: 2px; }
+  
+  /* DROPDOWNS */
+  .mega { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    min-width: 300px; 
+    background: #fff; 
+    border-radius: 0 0 12px 12px; 
+    box-shadow: 0 24px 48px rgba(29,21,38,0.22); 
+    border: 1px solid var(--line); 
+    border-top: none; 
+    padding: 12px; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(8px); 
+    transition: all 0.2s ease; 
+    z-index: 1000000 !important; 
+  }
+  .nav-item.open .mega { opacity: 1; visibility: visible; transform: translateY(0); }
+  .mega a { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--ink); }
+  .mega a:hover { background: var(--light-grey); color: var(--purple); }
+  .mega .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  /* HERO SECTION */
+  .hero { padding: 80px 0; background: #F4F3F6; position: relative; z-index: 1; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.15; margin-bottom: 24px; color: var(--plum); }
+  .hero h1 em { font-style: normal; color: var(--purple); }
+  .hero p { font-size: 15.5px; color: var(--ink-soft); margin-bottom: 32px; line-height: 1.6; }
+  
+  .btn { padding: 14px 24px; border-radius: 10px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; display: inline-flex; align-items: center; }
+  .btn-primary { background: var(--gold); color: var(--plum); box-shadow: 0 4px 12px rgba(233,192,54,0.3); }
+  .btn-secondary { background: transparent; color: var(--purple); border: 1.5px solid var(--purple); margin-left: 12px; }
+
+  /* CAROUSEL */
+  .carousel-container { position: relative; width: 100%; height: 380px; border-radius: 16px; overflow: hidden; box-shadow: 0 16px 36px rgba(0,0,0,0.15); background: #222; }
+  .carousel-slides { width: 100%; height: 100%; position: relative; }
+  .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease-in-out; display: flex; flex-direction: column; justify-content: flex-end; }
+  .slide.active { opacity: 1; z-index: 2; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1; }
+  .slide-caption { position: relative; z-index: 3; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%); padding: 32px 24px; color: #fff; }
+  .slide-caption h4 { font-family: 'Sora', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 6px; color: var(--gold); text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+  .slide-caption p { font-size: 13.5px; color: rgba(255,255,255,0.85); text-shadow: 0 1px 3px rgba(0,0,0,0.4); margin: 0; }
+  
+  .carousel-dots { position: absolute; bottom: 15px; left: 24px; z-index: 10; display: flex; gap: 8px; }
+  .dot-indicator { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.45); cursor: pointer; transition: all 0.3s; }
+  .dot-indicator.active { background: var(--gold); width: 22px; border-radius: 4px; }
+
+  /* TWO-COLUMN SIDE-BY-SIDE INDUSTRIES LAYOUT */
+  .section-block { padding: 80px 0; }
+  .industries-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+  .industries-photo { width: 100%; height: 500px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.12); background: #eee; }
+  .industries-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; display: block; }
+  .list-layout { background: #fff; padding: 40px; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .list-layout h3 { font-size: 26px; font-weight: 700; margin-bottom: 24px; color: var(--purple); border-left: 4px solid var(--gold); padding-left: 12px; }
+  .list-layout ul { padding-left: 20px; }
+  .list-layout li { margin-bottom: 12px; font-size: 15.5px; color: var(--ink-soft); list-style-type: square; }
+
+  /* FOOTER GRID */
+  footer { background: var(--plum); color: rgba(255,255,255,0.7); padding: 64px 0 32px; border-top: 4px solid var(--purple); position: relative; z-index: 50; }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 13.5px; margin-top: 16px; color: var(--muted-grey); line-height: 1.6; }
+  
+  .footer-column-container { display: grid; grid-template-rows: auto auto; gap: 40px; }
+  .footer-col h4 { font-size: 13px; font-family: 'Sora', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; margin-bottom: 16px; border-left: 3px solid var(--gold); padding-left: 10px; }
+  .footer-col a { display: block; font-size: 13.5px; color: var(--light-grey); margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold-light); }
+  
+  .sub-drop-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: transparent; border: none; color: var(--light-grey); font-size: 13.5px; padding: 4px 0; margin-bottom: 6px; cursor: pointer; }
+  .sub-drop-toggle:hover { color: var(--gold-light); }
+  .sub-drop-menu { max-height: 0; overflow: hidden; transition: max-height 0.25s ease-out; background: rgba(0,0,0,0.2); border-radius: 6px; padding: 0 12px; }
+  .sub-drop-menu.open { max-height: 200px; padding: 8px 12px; margin-bottom: 10px; }
+  .sub-drop-menu a { font-size: 12.5px !important; margin-bottom: 8px !important; color: var(--muted-grey) !important; }
+
+  .footer-social-strip { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .social-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--muted-grey); }
+  .social-links { display: flex; gap: 20px; }
+  .social-links a { font-size: 13.5px; font-weight: 600; color: var(--gold-light); }
+  .social-links a:hover { text-decoration: underline; }
+
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted-grey); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrapper">
+      <img src="logo.png" alt="NextMerch Global Ltd Logo" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerText='NextMerch Global Ltd.'" />
+    </div>
+    <div class="auth-widget">
+      <button class="auth-btn active">Sign in</button>
+      <button class="auth-btn">Sign up</button>
+    </div>
+  </div>
+</header>
+
+<div class="subnav">
+  <div class="subnav-inner">
+    <div class="nav-item" id="homeTab"><a href="index.html">Home</a></div>
+    <div class="nav-item" id="aboutTab">
+      <a onclick="toggleMenu(event, 'aboutTab')">About Us <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="about-us.html"><span class="dot"></span>Company Overview</a>
+        <a href="about-us.html#story"><span class="dot"></span>Our Story</a>
+        <a href="about-us.html#mission"><span class="dot"></span>Mission Statement</a>
+        <a href="about-us.html#vision"><span class="dot"></span>Vision Statement</a>
+        <a href="about-us.html#values"><span class="dot"></span>Core Values</a>
+      </div>
+    </div>
+    <div class="nav-item" id="servicesTab">
+      <a onclick="toggleMenu(event, 'servicesTab')">Services <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="services/wholesale.html"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
+        <a href="services/procurement.html"><span class="dot"></span>Procurement &amp; Sourcing</a>
+        <a href="services/supply-chain.html"><span class="dot"></span>Distribution &amp; Supply Chain</a>
+      </div>
+    </div>
+    <div class="nav-item" id="bizTab">
+      <a onclick="toggleMenu(event, 'bizTab')">Business Divisions <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="divisions/healthcare-solutions.html"><span class="dot"></span>Healthcare Solutions</a>
+        <a href="divisions/general-supplies.html"><span class="dot"></span>General Supplies Solutions</a>
+        <a href="divisions/educational-supplies.html"><span class="dot"></span>Educational Supplies Solutions</a>
+        <a href="divisions/automobile-solutions.html"><span class="dot"></span>Automobile Solutions</a>
+      </div>
+    </div>
+    <div class="nav-item" id="blogTab"><a href="blog.html">Blog</a></div>
+    <div class="nav-item" id="contactTab"><a href="contact.html">Contact</a></div>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Smarter Sourcing. Reliable Procurement. <em>Seamless Delivery.</em></h1>
+      <p>At NextMerch Global Ltd., we transform complex sourcing and procurement challenges into efficient, cost-effective, and dependable supply solutions. Through our global supplier network, strategic partnerships, and commitment to excellence, we help individual clients, businesses, NGOs, and governments source quality products with confidence.</p>
+      <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+      <a href="services/wholesale.html" class="btn btn-secondary">Explore Our Services</a>
+    </div>
+    
+    <div class="carousel-container">
+      <div class="carousel-slides" id="carouselSlides">
+        
+        <div class="slide active">
+          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80" alt="Ship with containers at sea">
+          <div class="slide-caption">
+            <h4>Global Transit Networks</h4>
+            <p>Reliable ocean freight forwarding bridging global destinations.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80" alt="Harbour worker smiling happily with helmet">
+          <div class="slide-caption">
+            <h4>Dedicated Port Staff</h4>
+            <p>On-the-ground support ensuring seamless handoffs and security.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1521791136364-72864700229b?auto=format&fit=crop&w=600&q=80" alt="Governments source quality products">
+          <div class="slide-caption">
+            <h4>Government Level Procurement</h4>
+            <p>Serving institutional entities with certified bulk shipments.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80" alt="Supply solution">
+          <div class="slide-caption">
+            <h4>Strategic Supply Chain Solutions</h4>
+            <p>Maximizing product movement velocity with absolute accountability.</p>
+          </div>
+        </div>
+
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1556761175-b813d53a362d?auto=format&fit=crop&w=600&q=80" alt="Officers doing paperwork happily">
+          <div class="slide-caption">
+            <h4>Compliance &amp; Trade Coordination</h4>
+            <p>Our paperwork specialists process export documentation swiftly.</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="carousel-dots" id="carouselDots">
+        <span class="dot-indicator active" onclick="setSlide(0)"></span>
+        <span class="dot-indicator" onclick="setSlide(1)"></span>
+        <span class="dot-indicator" onclick="setSlide(2)"></span>
+        <span class="dot-indicator" onclick="setSlide(3)"></span>
+        <span class="dot-indicator" onclick="setSlide(4)"></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section-block" id="industries">
+  <div class="wrap industries-grid">
+    <div class="industries-photo">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=750&q=80" alt="Smiling clean-shaven Ghanaian business executive in formal suit" />
+    </div>
+    <div class="list-layout">
+      <h3>Industries We Serve</h3>
+      <ul>
+        <li>Individual Buyers</li>
+        <li>Healthcare</li>
+        <li>Government Procurement</li>
+        <li>Education</li>
+        <li>Construction &amp; Mining</li>
+        <li>Manufacturing &amp; Hospitality</li>
+        <li>Agriculture &amp; Transportation</li>
+        <li>Oil &amp; Gas</li>
+        <li>NGOs &amp; Development Partners</li>
+        <li>SMEs &amp; Corporate Organizations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      
+      <div class="footer-brand">
+        <div class="logo-text">
+          <span class="name" style="color:#fff; font-weight:700; font-size:18px;">NEXTMERCH GLOBAL LTD.</span>
+          <span class="tag" style="color:var(--gold); font-size:10px;">"Source Smart. Deliver Faster."</span>
+        </div>
+        <p>Intelligent operational movement bridging supply chains globally.</p>
+      </div>
+
+      <div class="footer-column-container">
+        <div class="footer-col">
+          <h4>Project &amp; Case Studies</h4>
+          <a href="#">Healthcare Projects</a>
+          <a href="#">Educational Projects</a>
+          <a href="#">General Supplies</a>
+          <a href="#">Automotive Projects</a>
+          <a href="#">Government Procurement</a>
+        </div>
+        <div class="footer-col">
+          <h4>Careers</h4>
+          <a href="#">Why Join NextMerch</a>
+          <a href="#">Current Opportunities</a>
+          <a href="#">Internship Programme</a>
+          <a href="#">Submit Your CV</a>
+        </div>
+      </div>
+
+      <div class="footer-column-container">
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">FAQ</a>
+          <button class="sub-drop-toggle" onclick="toggleSubDrop(event)">
+            <span>Download Centre</span> <span style="font-size:9px;">▼</span>
+          </button>
+          <div class="sub-drop-menu" id="downloadSubDrop">
+            <a href="#">Product Catalogues</a>
+            <a href="#">Company Brochure</a>
+            <a href="#">Corporate Profile (PDF)</a>
+            <a href="#">Client Request for Quotation (RFQ) Form</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Newsletter Signup</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-social-strip">
+      <span class="social-head">Follow us on</span>
+      <div class="social-links">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">Twitter (X)</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 NextMerch Global Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu(event, id) {
+    event.stopPropagation();
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
+
+  function toggleSubDrop(event) {
+    event.stopPropagation();
+    const subMenu = document.getElementById('downloadSubDrop');
+    subMenu.classList.toggle('open');
+  }
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+  });
+
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot-indicator');
+  const totalSlides = slides.length;
+
+  function setSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = index;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  function nextSlide() {
+    let next = (currentSlide + 1) % totalSlides;
+    setSlide(next);
+  }
+
+  let slideInterval = setInterval(nextSlide, 4500);
+
+  document.getElementById('carouselDots').addEventListener('click', () => {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 5000);
+  });
+</script>
+</body>
+</html>
