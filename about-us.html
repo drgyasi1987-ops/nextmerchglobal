@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — NextMerch Global Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3646890852607153" crossorigin="anonymous"></script>
+
+<style>
+  :root {
+    --purple: #6A2B8D;
+    --gold: #E9C036;
+    --gold-light: #F3DE8A;
+    --industrial-grey: #CCCCCC;
+    --light-grey: #E5E5E5;
+    --muted-grey: #B3B3B3;
+    --bg-snow: #FFFFFF;
+    --ink: #1D1526;
+    --ink-soft: #655A72;
+    --line: rgba(29,21,38,0.10);
+    --plum: #2B1136;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-snow); color: var(--ink); line-height: 1.55; overflow-x: hidden; }
+  h1, h2, h3, .display { font-family: 'Sora', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  .wrap { max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER & NAVIGATION */
+  header {
+    position: relative; 
+    z-index: 10000;
+    background: linear-gradient(180deg, #9B57C4 0%, var(--purple) 45%, #3D1653 100%);
+    box-shadow: 0 6px 24px rgba(30,8,45,0.35);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 32px; max-width: 1220px; margin: 0 auto; gap: 16px; }
+  
+  .logo-wrapper {
+    background: #FFFFFF !important;
+    padding: 8px 20px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 150px;
+    min-height: 55px;
+  }
+  .logo-img { height: 55px; width: auto; object-fit: contain; display: block; background: #FFFFFF !important; }
+
+  .auth-widget { display: flex; gap: 10px; flex-shrink: 0; }
+  .auth-btn { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .auth-btn.active { background: var(--gold); color: var(--plum); border-color: var(--gold); }
+
+  .mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+  }
+
+  .subnav { 
+    position: sticky; 
+    top: 0; 
+    z-index: 999999 !important; 
+    background: rgba(255,255,255,0.97); 
+    backdrop-filter: blur(10px); 
+    border-bottom: 1px solid var(--line); 
+    box-shadow: 0 4px 20px rgba(29,21,38,0.08); 
+  }
+  .subnav-inner { display: flex; align-items: center; gap: 8px; max-width: 1220px; margin: 0 auto; padding: 0 32px; flex-wrap: wrap; }
+  .nav-item { position: relative; }
+  .nav-item > a { display: inline-flex; align-items: center; gap: 6px; padding: 18px 20px; font-size: 14.5px; font-weight: 600; color: var(--ink-soft); border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s ease; }
+  .nav-item > a:hover, .nav-item.open > a { color: var(--purple); border-color: var(--gold); background: rgba(106,43,141,0.04); }
+  .caret { font-size: 9px; margin-left: 2px; }
+  
+  .mega { 
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    min-width: 300px; 
+    background: #fff; 
+    border-radius: 0 0 12px 12px; 
+    box-shadow: 0 24px 48px rgba(29,21,38,0.22); 
+    border: 1px solid var(--line); 
+    border-top: none; 
+    padding: 12px; 
+    opacity: 0; 
+    visibility: hidden; 
+    transform: translateY(8px); 
+    transition: all 0.2s ease; 
+    z-index: 1000000 !important; 
+  }
+  .nav-item.open .mega { opacity: 1; visibility: visible; transform: translateY(0); }
+  .mega a { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--ink); }
+  .mega a:hover { background: var(--light-grey); color: var(--purple); }
+  .mega .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  /* MIDDLE PAGE ABOUT SECTION */
+  .about-hero {
+    padding: 80px 0;
+    background: #F4F3F6;
+    position: relative;
+    z-index: 1;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+  
+  .about-content {
+    font-family: Verdana, Geneva, sans-serif;
+  }
+  .about-content h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--purple);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .about-content h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--plum);
+  }
+  .about-content p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #333333;
+    margin-bottom: 24px;
+  }
+
+  /* 3D SLEEK GLOSSY DYNAMIC PHOTO CONTAINER */
+  .logo-3d-card {
+    position: relative;
+    width: 100%;
+    padding: 40px 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f4fa 50%, #eae2f0 100%);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+      0 20px 40px rgba(43, 17, 54, 0.15),
+      0 10px 15px rgba(106, 43, 141, 0.1),
+      inset 0 2px 3px rgba(255, 255, 255, 1),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .logo-3d-card:hover {
+    transform: translateY(-6px) rotateX(2deg) rotateY(-2deg);
+    box-shadow: 
+      0 30px 60px rgba(43, 17, 54, 0.22),
+      0 15px 25px rgba(233, 192, 54, 0.2),
+      inset 0 2px 3px rgba(255, 255, 255, 1);
+  }
+  .logo-3d-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      rgba(255, 255, 255, 0) 60%,
+      transparent 100%
+    );
+    transform: rotate(30deg);
+    animation: shine 6s infinite ease-in-out;
+  }
+  @keyframes shine {
+    0% { transform: translateY(-100%) rotate(30deg); }
+    20% { transform: translateY(100%) rotate(30deg); }
+    100% { transform: translateY(100%) rotate(30deg); }
+  }
+  .logo-3d-card img {
+    max-width: 90%;
+    max-height: 380px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.18));
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-block { padding: 80px 0; }
+  .industries-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; }
+  .industries-photo { width: 100%; height: 500px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(0,0,0,0.12); background: #eee; }
+  .industries-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+  .list-layout { background: #fff; padding: 40px; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
+  .list-layout h3 { font-size: 26px; font-weight: 700; margin-bottom: 24px; color: var(--purple); border-left: 4px solid var(--gold); padding-left: 12px; }
+  .list-layout ul { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-left: 0; list-style: none; }
+  .list-layout li { font-size: 15.5px; color: var(--ink-soft); display: flex; align-items: center; gap: 8px; }
+  .list-layout li::before { content: "■"; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer { background: var(--plum); color: rgba(255,255,255,0.7); padding: 64px 0 32px; border-top: 4px solid var(--purple); position: relative; z-index: 50; }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 13.5px; margin-top: 16px; color: var(--muted-grey); line-height: 1.6; }
+  
+  .footer-column-container { display: grid; grid-template-rows: auto auto; gap: 40px; }
+  .footer-col h4 { font-size: 13px; font-family: 'Sora', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #fff; margin-bottom: 16px; border-left: 3px solid var(--gold); padding-left: 10px; }
+  .footer-col a { display: block; font-size: 13.5px; color: var(--light-grey); margin-bottom: 10px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--gold-light); }
+  
+  .sub-drop-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; background: transparent; border: none; color: var(--light-grey); font-size: 13.5px; padding: 4px 0; margin-bottom: 6px; cursor: pointer; }
+  .sub-drop-toggle:hover { color: var(--gold-light); }
+  .sub-drop-menu { max-height: 0; overflow: hidden; transition: max-height 0.25s ease-out; background: rgba(0,0,0,0.2); border-radius: 6px; padding: 0 12px; }
+  .sub-drop-menu.open { max-height: 200px; padding: 8px 12px; margin-bottom: 10px; }
+  .sub-drop-menu a { font-size: 12.5px !important; margin-bottom: 8px !important; color: var(--muted-grey) !important; }
+
+  .footer-social-strip { border-top: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 20px 0; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 24px; }
+  .social-head { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--muted-grey); }
+  .social-links { display: flex; gap: 20px; }
+  .social-links a { font-size: 13.5px; font-weight: 600; color: var(--gold-light); }
+  .social-links a:hover { text-decoration: underline; }
+
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted-grey); flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 991px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .industries-grid { grid-template-columns: 1fr; gap: 32px; }
+    .industries-photo { height: 400px; }
+    .list-layout { padding: 32px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 767px) {
+    .header-inner { padding: 12px 20px; }
+    .logo-wrapper { min-width: 130px; min-height: 48px; padding: 6px 14px; }
+    .logo-img { height: 42px; }
+    
+    .mobile-menu-btn { display: block; }
+    
+    .subnav { position: relative; display: none; background: #fff; width: 100%; border-top: 1px solid var(--line); }
+    .subnav.active { display: block; }
+    .subnav-inner { flex-direction: column; align-items: stretch; gap: 0; padding: 8px 16px; }
+    .nav-item { width: 100%; border-bottom: 1px solid rgba(29,21,38,0.05); }
+    .nav-item > a { display: flex; justify-content: space-between; width: 100%; padding: 14px 12px; font-size: 15px; border-bottom: none; }
+    
+    .mega { position: static; box-shadow: none; border: none; padding: 4px 12px 12px 12px; display: none; opacity: 1; visibility: visible; transform: none; background: rgba(0,0,0,0.02); border-radius: 8px; }
+    .nav-item.open .mega { display: block; }
+    
+    .about-hero { padding: 40px 0; }
+    .about-content h1 { font-size: 28px; margin-bottom: 16px; }
+    .about-content p { font-size: 14px; }
+
+    .section-block { padding: 48px 0; }
+    .industries-photo { height: 280px; }
+    .list-layout { padding: 24px 16px; }
+    .list-layout h3 { font-size: 22px; margin-bottom: 16px; }
+    .list-layout ul { grid-template-columns: 1fr; gap: 10px; }
+    .list-layout li { font-size: 14.5px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-column-container { gap: 32px; }
+    .footer-social-strip { flex-direction: column; gap: 12px; text-align: center; }
+    .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrapper">
+      <img src="logo.png" alt="NextMerch Global Ltd Logo" class="logo-img" onerror="this.style.display='none'; this.parentNode.innerText='NextMerch Global Ltd.'" />
+    </div>
+    <div class="auth-widget">
+      <button class="auth-btn active">Sign in</button>
+      <button class="auth-btn">Sign up</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="subnav" id="subnavBar">
+  <div class="subnav-inner">
+    <div class="nav-item" id="homeTab"><a href="index.html">Home</a></div>
+    <div class="nav-item open" id="aboutTab">
+      <a onclick="toggleMenu(event, 'aboutTab')">About Us <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="about-us.html"><span class="dot"></span>Company Overview</a>
+        <a href="about-us.html#story"><span class="dot"></span>Our Story</a>
+        <a href="about-us.html#mission"><span class="dot"></span>Mission Statement</a>
+        <a href="about-us.html#vision"><span class="dot"></span>Vision Statement</a>
+        <a href="about-us.html#values"><span class="dot"></span>Core Values</a>
+      </div>
+    </div>
+    <div class="nav-item" id="servicesTab">
+      <a onclick="toggleMenu(event, 'servicesTab')">Services <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="services/wholesale.html"><span class="dot"></span>Wholesale &amp; Retail Trade</a>
+        <a href="services/procurement.html"><span class="dot"></span>Procurement &amp; Sourcing</a>
+        <a href="services/supply-chain.html"><span class="dot"></span>Distribution &amp; Supply Chain</a>
+      </div>
+    </div>
+    <div class="nav-item" id="bizTab">
+      <a onclick="toggleMenu(event, 'bizTab')">Business Divisions <span class="caret">▼</span></a>
+      <div class="mega">
+        <a href="divisions/healthcare-solutions.html"><span class="dot"></span>Healthcare Solutions</a>
+        <a href="divisions/general-supplies.html"><span class="dot"></span>General Supplies Solutions</a>
+        <a href="divisions/educational-supplies.html"><span class="dot"></span>Educational Supplies Solutions</a>
+        <a href="divisions/automobile-solutions.html"><span class="dot"></span>Automobile Solutions</a>
+      </div>
+    </div>
+    <div class="nav-item" id="blogTab"><a href="blog.html">Blog</a></div>
+    <div class="nav-item" id="contactTab"><a href="contact.html">Contact</a></div>
+  </div>
+</div>
+
+<section class="about-hero" id="overview">
+  <div class="wrap about-grid">
+    <div class="about-content">
+      <h2>2. ABOUT</h2>
+      <h1>Company Overview</h1>
+      <p>NextMerch Global Ltd. is a diversified procurement and supply chain company providing intelligent sourcing and end-to-end procurement solutions. Rather than simply selling products, we solve procurement challenges by helping organizations source the right products from the right suppliers at the right price. Our international supplier network, procurement expertise, and customer-first philosophy enable us to deliver dependable, cost-effective, and scalable solutions.</p>
+    </div>
+    
+    <div class="logo-3d-card">
+      <img src="logo.png" alt="NextMerch Global Ltd 3D Logo" />
+    </div>
+  </div>
+</section>
+
+<section class="section-block" id="industries">
+  <div class="wrap industries-grid">
+    <div class="industries-photo">
+      <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&h=1000&q=80" alt="Cargo Ship and Port Logistics Operations" />
+    </div>
+    <div class="list-layout">
+      <h3>Industries We Serve</h3>
+      <ul>
+        <li>Individual Buyers</li>
+        <li>Healthcare</li>
+        <li>Government Procurement</li>
+        <li>Education</li>
+        <li>Construction &amp; Mining</li>
+        <li>Manufacturing &amp; Hospitality</li>
+        <li>Agriculture &amp; Transportation</li>
+        <li>Oil &amp; Gas</li>
+        <li>NGOs &amp; Development Partners</li>
+        <li>SMEs &amp; Corporate Organizations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">
+          <span class="name" style="color:#fff; font-weight:700; font-size:18px;">NEXTMERCH GLOBAL LTD.</span>
+          <span class="tag" style="color:var(--gold); font-size:10px;">"Source Smart. Deliver Faster."</span>
+        </div>
+        <p>Intelligent operational movement bridging supply chains globally.</p>
+      </div>
+
+      <div class="footer-column-container">
+        <div class="footer-col">
+          <h4>Project &amp; Case Studies</h4>
+          <a href="#">Healthcare Projects</a>
+          <a href="#">Educational Projects</a>
+          <a href="#">General Supplies</a>
+          <a href="#">Automotive Projects</a>
+          <a href="#">Government Procurement</a>
+        </div>
+        <div class="footer-col">
+          <h4>Careers</h4>
+          <a href="#">Why Join NextMerch</a>
+          <a href="#">Current Opportunities</a>
+          <a href="#">Internship Programme</a>
+          <a href="#">Submit Your CV</a>
+        </div>
+      </div>
+
+      <div class="footer-column-container">
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#">FAQ</a>
+          <button class="sub-drop-toggle" onclick="toggleSubDrop(event)">
+            <span>Download Centre</span> <span style="font-size:9px;">▼</span>
+          </button>
+          <div class="sub-drop-menu" id="downloadSubDrop">
+            <a href="#">Product Catalogues</a>
+            <a href="#">Company Brochure</a>
+            <a href="#">Corporate Profile (PDF)</a>
+            <a href="#">Client Request for Quotation (RFQ) Form</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Newsletter Signup</a>
+          <a href="#">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-social-strip">
+      <span class="social-head">Follow us on</span>
+      <div class="social-links">
+        <a href="#" target="_blank">Facebook</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">Twitter (X)</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 NextMerch Global Ltd. All Rights Reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileNav() {
+    const subnav = document.getElementById('subnavBar');
+    subnav.classList.toggle('active');
+  }
+
+  function toggleMenu(event, id) {
+    event.stopPropagation();
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
+
+  function toggleSubDrop(event) {
+    event.stopPropagation();
+    const subMenu = document.getElementById('downloadSubDrop');
+    subMenu.classList.toggle('open');
+  }
+
+  document.addEventListener('click', () => {
+    if (window.innerWidth > 767) {
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('open'));
+    }
+  });
+</script>
+</body>
+</html>
