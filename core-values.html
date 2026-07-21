@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Values | NextMerch Global Ltd.</title>
+    <style>
+        :root {
+            --purple-main: #5b21b6;
+            --purple-dark: #3b0764;
+            --gold-main: #eab308;
+            --gold-hover: #ca8a04;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        
+        header { background-color: var(--purple-dark); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 10px; background: white; padding: 6px 16px; border-radius: 8px; }
+        .logo-text { font-weight: bold; color: var(--purple-dark); font-size: 1.2rem; }
+        .tagline { font-size: 0.7rem; color: #666; text-transform: uppercase; }
+        nav ul { display: flex; list-style: none; gap: 1.5rem; }
+        nav a { color: white; text-decoration: none; font-weight: 600; padding: 8px 12px; border-radius: 4px; transition: 0.2s; }
+        nav a:hover, nav .dropdown:hover > a { background-color: rgba(255,255,255,0.1); color: var(--gold-main); }
+        .dropdown { position: relative; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background-color: white; min-width: 200px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 6px; overflow: hidden; }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { color: var(--text-dark); display: block; padding: 10px 16px; font-weight: 500; }
+        .dropdown-menu a:hover { background-color: var(--bg-light); color: var(--purple-main); }
+        .btn-gold { background-color: var(--gold-main); color: var(--purple-dark); font-weight: bold; padding: 8px 18px; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; }
+        .btn-gold:hover { background-color: var(--gold-hover); }
+
+        .hero-banner { background: linear-gradient(135deg, var(--purple-main), var(--purple-dark)); color: white; padding: 4rem 2rem; text-align: center; }
+        .hero-banner h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--gold-main); }
+        .container { max-width: 1100px; margin: 3rem auto; padding: 0 1.5rem; }
+        .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .value-card { background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-left: 4px solid var(--purple-main); }
+        .value-card h3 { color: var(--purple-dark); font-size: 1.3rem; margin-bottom: 0.5rem; }
+
+        footer { background-color: var(--purple-dark); color: white; text-align: center; padding: 2rem; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div>
+                <div class="logo-text">NextMerch Global Ltd.</div>
+                <div class="tagline">SOURCE SMART. DELIVER FASTER.</div>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="about-us.html">About Us ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="company-overview.html">Company Overview</a>
+                        <a href="our-story.html">Our Story</a>
+                        <a href="mission-vision.html">Mission & Vision</a>
+                        <a href="core-values.html">Core Values</a>
+                    </div>
+                </li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="business-divisions.html">Business Divisions</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <a href="contact.html" class="btn-gold">Request a Quote</a>
+    </header>
+
+    <section class="hero-banner">
+        <h1>Core Values (NEXTMERCH)</h1>
+        <p>The Principles That Define How We Serve Our Clients</p>
+    </section>
+
+    <main class="container">
+        <div class="value-grid">
+            <div class="value-card">
+                <h3>N — Nobility</h3>
+                <p>We conduct every transaction with honesty, integrity, transparency, and respect.</p>
+            </div>
+            <div class="value-card">
+                <h3>E — Excellence</h3>
+                <p>We pursue the highest standards in sourcing, procurement, logistics, and customer service.</p>
+            </div>
+            <div class="value-card">
+                <h3>X — Xceleration</h3>
+                <p>We believe speed, responsiveness, and operational efficiency create competitive advantages for our clients.</p>
+            </div>
+            <div class="value-card">
+                <h3>T — Trust</h3>
+                <p>We build lasting relationships through reliability, accountability, and consistent delivery.</p>
+            </div>
+            <div class="value-card">
+                <h3>M — Modernization</h3>
+                <p>We embrace innovation, technology, and continuous improvement to enhance procurement and supply chain performance.</p>
+            </div>
+            <div class="value-card">
+                <h3>E — Engagement</h3>
+                <p>We foster meaningful collaboration with clients, suppliers, employees, and strategic partners.</p>
+            </div>
+            <div class="value-card">
+                <h3>R — Responsibility</h3>
+                <p>We promote ethical sourcing, responsible business practices, environmental stewardship, and regulatory compliance.</p>
+            </div>
+            <div class="value-card">
+                <h3>C — Consistency</h3>
+                <p>We deliver dependable results through disciplined systems, quality assurance, and continuous improvement.</p>
+            </div>
+            <div class="value-card">
+                <h3>H — Human-Centered Approach</h3>
+                <p>People remain at the center of everything we do. We value respect, fairness, empathy, and long-term partnerships.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; NextMerch Global Ltd. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
